@@ -49,22 +49,69 @@
           </div>
         </div>
       </article>
+
       <article class="box">
-        <h3 class="title is-3">Balance</h3>
-  
+
         <div class="columns">
-          <div class="column is-3">
-            <p class="is-size-5">Ganancias</p>
-            <p class="is-size-5">Gastos</p>
-            <p class="is-size-4">Total</p>
+          <div class="column">
+            <h4 class="is-4 title has-text-weight-bold">Filtros</h4>
           </div>
-  
-          <div class="column has-text-right is-9">
-            <p class="is-size-5">0</p>
-            <p class="is-size-5">0</p>
-            <p class="is-size-5">0</p>
+          <div class="column has-text-right">
+            <a href="#">Ocultar filtros</a>
           </div>
         </div>
+  
+        <div class="field">
+          <label class="has-text-weight-bold">Tipo</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select>
+                <option>Todos</option>
+                <option>Gasto</option>
+                <option>Ganancia</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="has-text-weight-bold">Categoría</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select>
+                <option>Todas</option>
+                <option>Comida</option>
+                <option>Servicios</option>
+                <option>Salidas</option>
+                <option>Educación</option>
+                <option>Transporte</option>
+                <option>Trabajo</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="has-text-weight-bold">Desde</label>
+          <input class="input" type="date">
+        </div>
+
+        <div class="field">
+          <label class="has-text-weight-bold">Ordenar por</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select>
+                <option>Másreciente</option>
+                <option>Menos reciente</option>
+                <option>Mayor monto</option>
+                <option>Menor monto</option>
+                <option>A/Z</option>
+                <option>Z/A</option>              
+              </select>
+            </div>
+          </div>
+        </div>
+
       </article>
     </div>
 
@@ -74,12 +121,11 @@
       <article class="box">
 
         <div class="columns">
-          <h4 class="column title is-4">Operaciones</h4>
-          <div class="column is-flex is-justify-content-end">
-            <div class="buttons">
-              <button class="button is-primary">+ Nueva operación</button>
-            </div>
+          <h4 class="is-size-4 has-text-weight-bold pl-3 pt-3">Operaciones</h4>
+          <div class="column has-text-right">
+            <button type="button" class="button is-primary">+ Nueva operación</button>
           </div>
+
         </div>
 
         
