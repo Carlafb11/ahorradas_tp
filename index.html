@@ -15,7 +15,7 @@
 <body>
 
   <!-- Barra de navegación -->
-  <nav class="navbar is-primary py-2" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-primary py-2 is-spaced" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="#">
         <h1 class="is-size-2 has-text-weight-bold">
@@ -52,31 +52,33 @@
     <!-- Columna izquierda -->
     <div class="column is-3-widescreen is-4-desktop is-12-tablet is-offset-1-widescreen">
       <article class="box">
-        <h3 class="title is-3">Balance</h3>
+        <h3 class="title is-3 mb-6">Balance</h3>
 
-        <div class="columns">
-          <div class="column is-3">
-            <p class="is-size-5">Ganancias</p>
-            <p class="is-size-5">Gastos</p>
-            <p class="is-size-4">Total</p>
-          </div>
-
-          <div class="column has-text-right is-9">
-            <p class="is-size-5">0</p>
-            <p class="is-size-5">0</p>
-            <p class="is-size-5">0</p>
-          </div>
+        <div class="columns is-mobile is-vcentered">
+          <div class="column is-size-5">Ganancias</div>
+          <div class="column has-text-right has-text-success">+$0</div>
         </div>
+
+        <div class="columns is-mobile is-vcentered">
+          <div class="column is-size-5">Gastos</div>
+          <div class="column has-text-right has-text-danger">-$0</div>
+        </div>
+
+        <div class="columns is-mobile is-vcentered">
+          <div class="column is-size-4">Total</div>
+          <div class="column has-text-right has-text-weight-bold">$0</div>
+        </div>
+
       </article>
 
       <article class="box">
 
-        <div class="columns">
+        <div class="columns is-mobile is-vcentered">
           <div class="column">
-            <h4 class="is-4 title has-text-weight-bold">Filtros</h4>
+            <h4 class="column is-size-4 title has-text-weight-bold">Filtros</h4>
           </div>
-          <div class="column has-text-right">
-            <a href="#">Ocultar filtros</a>
+          <div class="column">
+            <a class="column has-text-right" href="#">Ocultar filtros</a>
           </div>
         </div>
 
@@ -184,8 +186,8 @@
           <span class="tag is-primary is-light">Trabajo</span>
           
         </div>
-
-  <section class="section columns">
+    </section>
+  <!-- <section class="section columns">
 
     <div class="column is-10 is-offset-1-widescreen">
       <article class="box">
@@ -208,7 +210,7 @@
 
       </article>
         
-    </div>
+    </div> -->
           
           
       
