@@ -8,9 +8,8 @@
   <title>AhorrADAs</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <link rel="icon" href="http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22" type="icon">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/628a30b0fe.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -31,7 +30,7 @@
     </div>
 
     <div id="main-nav-bar" class="navbar-menu">
-      <div class="navbar-end is-size-5">
+      <div class="navbar-end is-size-5 is-flex is-align-items-center">
 
         <button class="button is-primary">
           <i class="fas fa-chart-line mr-2" aria-hidden="true"></i> Balance
@@ -186,6 +185,26 @@
           
         </div>
 
+  <section class="section columns">
+
+    <div class="column is-10 is-offset-1-widescreen">
+      <article class="box">
+        <h2 class="title is-2 has-text-weight-bold">Categorías</h2> 
+        <label class="has-text-weight-bold">Nombre</label>
+
+          <div class="field mt-5">
+            <div class="control column is-vcentered">
+              <div class="columns is-half">
+                <input class="input is-one-quarter" type="text" placeholder="Nombre de nueva categoría">
+              </div>
+              <div class="control">
+                <button class="button is-success" id="agregar-categoria-boton">
+                  Agregar
+                </button>
+              </div>
+            </div>
+
+          </div>
 
       </article>
         
@@ -196,6 +215,7 @@
         
     
     </div>
+
   </section>
 
   <!-- Final de Seccion de Categorías -->
