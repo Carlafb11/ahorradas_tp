@@ -93,7 +93,14 @@ const operaciones = [
 
 // Convertir objeto de JS a JSON
 const operacionesConvertidasAJSON = JSON.stringify(operaciones)
-localStorage.setItem("operaciones", operacionesConvertidasAJSON)
-const addNewOperation = () => {
 
-}
+// Guardar en el almacenamiento local
+localStorage.setItem("operaciones", operacionesConvertidasAJSON)
+
+// Obtener info del local storage
+const dataLS = localStorage.getItem("operaciones")
+
+// Para convertir de JSON a JS
+const dataJS = JSON.parse(dataLS)
+
+console.log(dataJS)
