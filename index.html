@@ -74,10 +74,10 @@
           <label class="has-text-weight-bold">Tipo</label>
           <div class="control">
             <div class="select is-fullwidth">
-              <select>
-                <option>Todos</option>
-                <option>Gasto</option>
-                <option>Ganancia</option>
+              <select id="type-select">
+                <option value="all">Todos</option>
+                <option value="spends">Gasto</option>
+                <option value="gain">Ganancia</option>
               </select>
             </div>
           </div>
@@ -87,14 +87,14 @@
           <label class="has-text-weight-bold">Categoría</label>
           <div class="control">
             <div class="select is-fullwidth">
-              <select>
-                <option>Todas</option>
-                <option>Comida</option>
-                <option>Servicios</option>
-                <option>Salidas</option>
-                <option>Educación</option>
-                <option>Transporte</option>
-                <option>Trabajo</option>
+              <select id="category-select">
+                <option value="all">Todas</option>
+                <option value ="food">Comida</option>
+                <option value ="services">Servicios</option>
+                <option value ="entertainment">Salidas</option>
+                <option value ="education">Educación</option>
+                <option value="transport">Transporte</option>
+                <option value="work">Trabajo</option>
               </select>
             </div>
           </div>
@@ -102,14 +102,14 @@
 
         <div class="field">
           <label class="has-text-weight-bold">Desde</label>
-          <input class="input" type="date">
+          <input class="input" type="date" id="date-select">
         </div>
 
         <div class="field">
           <label class="has-text-weight-bold">Ordenar por</label>
           <div class="control">
             <div class="select is-fullwidth">
-              <select>
+              <select id="order-select">
                 <option>Más reciente</option>
                 <option>Menos reciente</option>
                 <option>Mayor monto</option>
