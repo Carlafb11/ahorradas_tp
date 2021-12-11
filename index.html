@@ -271,24 +271,25 @@
         <div class="column">
           <h2 class="title is-2 has-text-weight-bold">Nueva Operacion</h2>
 
-          <label class="label">Descripción</label>
+          <form>
+
+            <label class="label">Descripción</label>
           <div>
-            <input id="descripcion" class="input is-small" type="text" placeholder="Ingresa la descripción" id="input-new-operation-name"
-            
+            <input class="input is-small" type="text" placeholder="Ingresa la descripción" id="input-description-name">
           </div>
 
           <label for="monto" class="label">Monto</label>
           <div class="control">
-            <input id="monto" class="input is-small" type="number" value="0" placeholder="Ingresa el monto">
+            <input id="input-amount-name" class="input is-small" type="number" value="0" placeholder="Ingresa el monto">
           </div>
 
           <div class="field">
             <label for="tipo" class="label">Tipo</label>
             <div class="control">
               <div class="select is-fullwidth">
-                <select id="tipo">
-                  <option value="Gasto">Gasto</option>
-                  <option value="Ganancia">Ganancia</option>
+                <select id="input-for-type">
+                  <option value="spend">Gasto</option>
+                  <option value="gain">Ganancia</option>
                 </select>
               </div>
             </div>
@@ -297,7 +298,7 @@
           <label class="label">Categoría</label>
           <div class="control">
             <div class="select is-fullwidth">
-              <select id="Categoria">
+              <select id="select-for-category">
                 <option value="todos">Todas</option>
                 <option value="comidas">Comidas</option>
                 <option value="servicios">Servicios</option>
@@ -310,7 +311,7 @@
 
             <label class="label">Fecha</label>
             <div class="control">
-              <input id="input-fecha" class="input is-small" type="date">
+              <input id="input-for-date" class="input is-small" type="date">
             </div>
 
             <div class="column">
@@ -319,11 +320,15 @@
                 <button class="button is-light " id="cancel-new-operation">
                   Cancelar
                 </button>
-                <button class="button is-success" id="add-new-operation">
+                <button class="button is-success" id="form-button-add-new-operation">
                   Agregar
                 </button>
               </div>
             </div>
+
+          </form>
+
+          
       </article>
     </div>
     <!--  Final de Seccion Nueva Operacion -->

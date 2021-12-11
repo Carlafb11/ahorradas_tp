@@ -57,8 +57,19 @@ const buttonCancelNewOperation = document.getElementById("cancel-new-operation")
 const cardsSection = document.getElementById("cards-section")
 const buttonAddNewOperation= document.getElementById("add-new-operation")
 const categoriesSection = document.querySelector("#box-categories")
+
+const inputForNewDescription =document.querySelector("#input-description-name")
+const inputForNewAmount = document.querySelector("#input-amount-name")
+const selectType = document.querySelector("#input-for-type")
+const selectForCategory = document.querySelector("#select-for-category")
+const selectForDate = document.querySelector("#input-for-date")
+const formButtonAddNewOperation = document.getElementById("form-button-add-new-operation")
+console.log(formButtonAddNewOperation)
+
+
+
+
 openNewOperationButton.onclick = () => {
-    console.log ("boton para abrir modal")
     sectionNewOperation.classList.remove("is-hidden")
     categoriesSection.classList.add("is-hidden")
     cardsSection.classList.add("is-hidden")
@@ -92,8 +103,27 @@ const operaciones = [
 ]
 
 // Convertir objeto de JS a JSON
-const operacionesConvertidasAJSON = JSON.stringify(operaciones)
-localStorage.setItem("operaciones", operacionesConvertidasAJSON)
-const addNewOperation = () => {
+// localStorage.setItem("operaciones", operacionesConvertidasAJSON)
+
+
+const operacionesConvertidasAJSON = (object) => {
+  const objetoConvertidoAJSON = JSON.stringify(object)
+return objetoConvertidoAJSON
+}
+
+
+let operation = []
+
+formButtonAddNewOperation.onclick = (e) => {
+  e.preventDefault()
+  let addOperation = {
+      descripcion: inputForNewDescription.value,
+      monto: inputForNewAmount.value,
+      tipo: selectType.value,
+      categoria: selectForCategory.value,
+      fecha: selectForDate.value,
+  }
+  console.log(operation.push(addOperation))
+
 
 }
