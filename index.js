@@ -48,8 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-});
-
   
 ///////////////// SELECTORES ✨ /////////////
 
