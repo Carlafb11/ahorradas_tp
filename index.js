@@ -69,3 +69,27 @@ buttonCancelNewOperation.onclick = () => {
     sectionNewOperation.classList.add("is-hidden")
     cardsSection.classList.remove("is-hidden")
 }
+
+// TEST
+const operaciones = [
+
+  {
+      descripcion: 'descripcion',
+      categoria: 'Categoria',
+      fecha: 'fecha',
+      monto: 'monto',
+      tipo: 'tipo',
+  },
+
+  {
+      descripcion: 'vinos',
+      categoria: 'comida',
+      fecha: '25/09/2021',
+      monto: 5000,
+      tipo: 'gasto',
+  }
+]
+
+// Convertir objeto de JS a JSON
+const operacionesConvertidasAJSON = JSON.stringify(operaciones)
+localStorage.setItem("operaciones", operacionesConvertidasAJSON)
