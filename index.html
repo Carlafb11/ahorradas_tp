@@ -74,10 +74,10 @@
           <label class="has-text-weight-bold">Tipo</label>
           <div class="control">
             <div class="select is-fullwidth">
-              <select>
-                <option>Todos</option>
-                <option>Gasto</option>
-                <option>Ganancia</option>
+              <select id="type-select">
+                <option value="all">Todos</option>
+                <option value="expense">Gasto</option>
+                <option value="gain">Ganancia</option>
               </select>
             </div>
           </div>
@@ -87,14 +87,14 @@
           <label class="has-text-weight-bold">Categoría</label>
           <div class="control">
             <div class="select is-fullwidth">
-              <select>
-                <option>Todas</option>
-                <option>Comida</option>
-                <option>Servicios</option>
-                <option>Salidas</option>
-                <option>Educación</option>
-                <option>Transporte</option>
-                <option>Trabajo</option>
+              <select id="category-select">
+                <option value="all">Todas</option>
+                <option value ="food">Comida</option>
+                <option value ="services">Servicios</option>
+                <option value ="entertainment">Salidas</option>
+                <option value ="education">Educación</option>
+                <option value="transport">Transporte</option>
+                <option value="work">Trabajo</option>
               </select>
             </div>
           </div>
@@ -102,14 +102,14 @@
 
         <div class="field">
           <label class="has-text-weight-bold">Desde</label>
-          <input class="input" type="date">
+          <input class="input" type="date" id="date-select">
         </div>
 
         <div class="field">
           <label class="has-text-weight-bold">Ordenar por</label>
           <div class="control">
             <div class="select is-fullwidth">
-              <select>
+              <select id="order-select">
                 <option>Más reciente</option>
                 <option>Menos reciente</option>
                 <option>Mayor monto</option>
@@ -124,7 +124,7 @@
       </article>
     </div>
 
-    <!-- Columna derecha -->
+    <!-- Columna derecha - OPERACIONES -->
     <div class="column is-7-widescreen is-8-desktop">
 
       <article class="box">
@@ -135,16 +135,16 @@
             <button type="button" class="button is-primary" id="button-new-operation">+ Nueva operación</button>
           </div>
         </div>
-        <div class="columns has-text-weight-semibold is-hidden-mobile">
+        <div class="is-hidden columns has-text-weight-semibold is-hidden-mobile" id="tabla-operaciones">
           <div class="column is-3">Descripción</div>
           <div class="column is-3">Categoría</div>
           <div class="column is-2 has-text-right">Fecha</div>
           <div class="column is-2 has-text-right">Monto</div>
           <div class="column is-2 has-text-right">Acciones</div>
         </div>
-        <div id="contenedor-de-lista" />
 
-        <div class="is-hidden">
+        <div id="operations-img-container">
+
           <figure class="image is-3by1 my-6">
             <img src="https://frontend-proyecto-ahorradas.adaitw.org/imgs/wallet.svg">
           </figure>
@@ -154,6 +154,8 @@
             <p class="has-text-centered">Cambia los filtros o agrega operaciones</p>
           </div>
         </div>
+
+        <div id="contenedor-de-lista" />
 
       </article>
 
@@ -178,8 +180,6 @@
             Editar
           </button>
 
-
-
         </div>
 
         <div class="is-flex is-justify-content-space-between" id="lista-categorias">
@@ -200,9 +200,6 @@
         </div>
     </section>
           
-          
-    
-
   </section>
 
   <section class="section columns is-hidden">
@@ -242,7 +239,7 @@
 
   <!-- Seccion Nueva Operacion -->
 
-  <section class="section columns" id="seccion-nueva-operacion">
+  <section class="is-hidden section columns" id="seccion-nueva-operacion">
     <div class="column is-10 is-offset-1-widescreen">
       <article class="box">
         <div class="column">
@@ -265,7 +262,7 @@
             <div class="control">
               <div class="select is-fullwidth">
                 <select id="input-for-type">
-                  <option value="spend">Gasto</option>
+                  <option value="expense">Gasto</option>
                   <option value="gain">Ganancia</option>
                 </select>
               </div>
@@ -314,7 +311,7 @@
 
   
   <!-- Reportes -->
-  <section class=" section columns" id="seccion-nueva-operacion">
+  <section class="is-hidden section columns" id="seccion-reportes">
     <div class="column is-10 is-offset-1-widescreen">
       <article class="box">
         <h2 class="title is-2 has-text-weight-bold">Reportes</h2>

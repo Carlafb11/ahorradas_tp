@@ -58,6 +58,8 @@ const cardsSection = document.getElementById("cards-section")
 const buttonAddNewOperation= document.getElementById("add-new-operation")
 const categoriesSection = document.querySelector("#box-categories")
 
+//Selectores para Ventana de Agregar Nueva Operacion 
+
 const inputForNewDescription =document.querySelector("#input-description-name")
 const inputForNewAmount = document.querySelector("#input-amount-name")
 const selectType = document.querySelector("#input-for-type")
@@ -65,13 +67,23 @@ const selectForCategory = document.querySelector("#select-for-category")
 const selectForDate = document.querySelector("#input-for-date")
 const formButtonAddNewOperation = document.getElementById("form-button-add-new-operation")
 
+//Selectores para Filtros 
+const inputTypeSelect = document.querySelector("#type-select")
+const inputCategorySelect = document.querySelector("#category-select")
+const inputDateSelect = document.querySelector("#date-select")
+const inputOrderSelect = document.querySelector("#order-select")
 
+
+// Selectores para sección operaciones
+const reportsSection =  document.getElementById("seccion-reportes")
+const operationsImgContainer = document.getElementById("operations-img-container")
 
 
 openNewOperationButton.onclick = () => {
     sectionNewOperation.classList.remove("is-hidden")
     categoriesSection.classList.add("is-hidden")
     cardsSection.classList.add("is-hidden")
+    reportsSection.classList.add("is-hidden")
     
 }
 
@@ -81,56 +93,20 @@ buttonCancelNewOperation.onclick = () => {
     
 }
 
-// TEST
-// const operaciones = [
-
-//   {
-//       descripcion: 'vinos',
-//       categoria: 'comida',
-//       fecha: '25/09/2021',
-//       monto: 5000,
-//       tipo: 'gasto',
-//   },
-//   {
-//     descripcion: 'vinos2',
-//     categoria: 'comida',
-//     fecha: '25/09/2021',
-//     monto: 5000,
-//     tipo: 'gasto',
-// },
-// {
-//   descripcion: 'vinos3',
-//   categoria: 'comida',
-//   fecha: '25/09/2021',
-//   monto: 2323,
-//   tipo: 'gasto',
-// },
-// {
-//   descripcion: 'vinos4',
-//   categoria: 'comida',
-//   fecha: '25/09/2021',
-//   monto: 10000,
-//   tipo: 'gasto',
-// }
-// ]
-
-// Convertir objeto de JS a JSON
-// localStorage.setItem("operaciones", operacionesConvertidasAJSON)
-
-
-// const operacionesConvertidasAJSON = (object) => {
-//   const objetoConvertidoAJSON = JSON.stringify(object)
-//   return objetoConvertidoAJSON
-// }
-
-
-// let operation = []
-
 // Obtener info del local storage
 const dataLS = localStorage.getItem("operaciones")
 
 // Para convertir de JSON a JS
 const dataJS = JSON.parse(dataLS) || [];
+
+// Ocultar img si hay operaciones en LS
+const removeImg = () => {
+  if (dataJS.length > 0) {
+    operationsImgContainer.classList.add("is-hidden")
+  } 
+}
+
+removeImg()
 
 formButtonAddNewOperation.onclick = (e) => {
   e.preventDefault()
@@ -150,12 +126,25 @@ formButtonAddNewOperation.onclick = (e) => {
   window.location.reload();
 }
 
+// Eliminar operaciones del LS
+const removeOperationLS = (posicion) => {
+  const newArray = [...dataJS];
+  newArray.splice(posicion, 1);
+  localStorage.setItem("operaciones", JSON.stringify(newArray));
+  localStorage.setItem("operacionesConFiltro", JSON.stringify(newArray));
+  window.location.reload();
+}
+
 const llenarTabla = () => {
   const contenedor = document.getElementById('contenedor-de-lista')
-  const htmlHolder = "";
+  let htmlHolder = "";
+  //Obtener operaciones filtradas desde LS
+  const dataFiltrada = JSON.parse(localStorage.getItem("operacionesConFiltro"));
+  const arrayCorrecto = dataFiltrada || dataJS;
 
-  dataJS.forEach((item) => {
-    contenedor.innerHTML += `<div class="columns is-multiline is-mobile is-vcentered">
+  arrayCorrecto.map((item, index) => {
+    htmlHolder += 
+    `<div class="columns is-multiline is-mobile is-vcentered">
     <div class="column is-3-tablet is-6-mobile">
       <h3 class="has-text-weight-semibold" id="description">${item.descripcion}</h3>
     </div>
@@ -171,11 +160,73 @@ const llenarTabla = () => {
     <div class="column is-2-tablet is-6-mobile has-text-right">
       <p class="is-fullwidth">
         <a href="#" class="mr-3 is-size-7 edit-link">Editar</a>
-        <a href="#" class="is-size-7 delete-link">Eliminar</a>
+        <a href="#" class="is-size-7 delete-link" onclick={removeOperationLS(${index})}>Eliminar</a>
       </p>
     </div>
   </div>`;
   })
+contenedor.innerHTML=htmlHolder
 }
 
 llenarTabla()
+
+const filtrarData = (tipoFiltro, value) => {
+  let newArray = [...dataJS];
+
+  //filtro de type
+  if (tipoFiltro === "type") {
+    if (value === "all") {
+      newArray = [...dataJS]
+    } else {
+      const prueba =
+        newArray.filter((item) => item.tipo === value);
+      newArray = prueba;
+    }
+  }
+  
+
+  localStorage.setItem("operacionesConFiltro", JSON.stringify(newArray));
+  llenarTabla();
+}
+
+
+
+///////////////// FUNCIONALIDAD DE FILTROS ✨ /////////////
+
+// const inputTypeSelect = document.querySelector("#type-select")
+// const inputCategorySelect = document.querySelector("#category-select")
+// const inputDateSelect = document.querySelector("#date-select")
+// const inputOrderSelect = document.querySelector("#order-select")
+
+
+// const applyFilters = () => {
+//   // const type = inputTypeSelect.value
+//   // const filterByType = dataJS.filter((item)=>{
+//   //   if(type === "all") {
+//   //     return item
+//   //   }
+
+//   //   return item.tipo === type
+//   // })
+//   const newArray = [...dataJS];
+//   const category = selectForCategory.value
+//   const filterByCategory = newArray.filter((item)=> {
+//     if (category==="all") {
+//       console.log("usuario seleccono todos")
+//       return item
+//     }
+//     return item.categoria === category
+//   })
+  
+//   return filterByCategory
+// }
+
+
+inputTypeSelect.onchange = (event) => {
+  filtrarData('type', event.target.value)
+}
+
+// inputCategorySelect.onchange = () => {
+//   // const filteredArray = applyFilters()
+//   // llenarTabla(filteredArray)
+// }
