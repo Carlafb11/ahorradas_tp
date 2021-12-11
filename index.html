@@ -7,8 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AhorrADAs</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-  <link rel="icon" href="http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22" type="icon">
-  <script src="https://kit.fontawesome.com/628a30b0fe.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -144,28 +142,7 @@
           <div class="column is-2 has-text-right">Monto</div>
           <div class="column is-2 has-text-right">Acciones</div>
         </div>
-        <div id="">
-          <div class="columns is-multiline is-mobile is-vcentered">
-            <div class="column is-3-tablet is-6-mobile">
-              <h3 class="has-text-weight-semibold" id="descripcion">Test</h3>
-            </div>
-            <div class="column is-3-tablet is-6-mobile has-text-right-mobile">
-              <span class="tag is-primary is-light" id="categoria">Trabajo</span>
-            </div>
-            <div class="column is-2-tablet has-text-grey is-hidden-mobile has-text-right-tablet" id="fecha">
-              11/12/2021
-            </div>
-            <div class="column is-2-tablet is-6-mobile has-text-weight-bold has-text-right-tablet is-size-4-mobile has-text-success" id="monto">
-              +$1200
-            </div>
-            <div class="column is-2-tablet is-6-mobile has-text-right">
-              <p class="is-fullwidth">
-                <a href="#" class="mr-3 is-size-7 edit-link">Editar</a>
-                <a href="#" class="is-size-7 delete-link">Eliminar</a>
-              </p>
-            </div>
-          </div>
-        </div>
+        <div id="contenedor-de-lista" />
 
         <div class="is-hidden">
           <figure class="image is-3by1 my-6">
@@ -275,7 +252,7 @@
 
             <label class="label">Descripción</label>
           <div>
-            <input class="input is-small" type="text" placeholder="Ingresa la descripción" id="input-description-name">
+            <input class="input is-small" type="text" placeholder="Ingresa la descripción" id="input-new-operation-name">
           </div>
 
           <label for="monto" class="label">Monto</label>
@@ -358,7 +335,7 @@
 
     </div>
   </section>
-
+  <script src="https://kit.fontawesome.com/628a30b0fe.js" crossorigin="anonymous"></script>
   <script src="index.js"></script>
 </body>
 
