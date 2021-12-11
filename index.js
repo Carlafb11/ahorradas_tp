@@ -75,25 +75,72 @@ buttonCancelNewOperation.onclick = () => {
 const operaciones = [
 
   {
-      descripcion: 'descripcion',
-      categoria: 'Categoria',
-      fecha: 'fecha',
-      monto: 'monto',
-      tipo: 'tipo',
-  },
-
-  {
       descripcion: 'vinos',
       categoria: 'comida',
       fecha: '25/09/2021',
       monto: 5000,
       tipo: 'gasto',
-  }
+  },
+  {
+    descripcion: 'vinos2',
+    categoria: 'comida',
+    fecha: '25/09/2021',
+    monto: 5000,
+    tipo: 'gasto',
+},
+{
+  descripcion: 'vinos3',
+  categoria: 'comida',
+  fecha: '25/09/2021',
+  monto: 5000,
+  tipo: 'gasto',
+},
+{
+  descripcion: 'vinos4',
+  categoria: 'comida',
+  fecha: '25/09/2021',
+  monto: 10000,
+  tipo: 'gasto',
+}
 ]
 
 // Convertir objeto de JS a JSON
 const operacionesConvertidasAJSON = JSON.stringify(operaciones)
-localStorage.setItem("operaciones", operacionesConvertidasAJSON)
-const addNewOperation = () => {
 
+// Guardar en el almacenamiento local
+localStorage.setItem("operaciones", operacionesConvertidasAJSON)
+
+// Obtener info del local storage
+const dataLS = localStorage.getItem("operaciones")
+
+// Para convertir de JSON a JS
+const dataJS = JSON.parse(dataLS)
+
+const llenarTabla = () => {
+  const contenedor = document.getElementById('contenedor-de-lista')
+  const htmlHolder = "";
+  dataJS.forEach((item) => {
+    contenedor.innerHTML += `<div class="columns is-multiline is-mobile is-vcentered">
+    <div class="column is-3-tablet is-6-mobile">
+      <h3 class="has-text-weight-semibold" id="description">${item.descripcion}</h3>
+    </div>
+    <div class="column is-3-tablet is-6-mobile has-text-right-mobile">
+      <span class="tag is-primary is-light" id="category">${item.categoria}</span>
+    </div>
+    <div class="column is-2-tablet has-text-grey is-hidden-mobile has-text-right-tablet" id="date">
+      ${item.fecha}
+    </div>
+    <div class="column is-2-tablet is-6-mobile has-text-weight-bold has-text-right-tablet is-size-4-mobile has-text-success" id="amount">
+      ${item.monto}
+    </div>
+    <div class="column is-2-tablet is-6-mobile has-text-right">
+      <p class="is-fullwidth">
+        <a href="#" class="mr-3 is-size-7 edit-link">Editar</a>
+        <a href="#" class="is-size-7 delete-link">Eliminar</a>
+      </p>
+    </div>
+  </div>`;
+  })
 }
+
+llenarTabla()
