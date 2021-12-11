@@ -185,6 +185,7 @@ const applyFilters = () => {
     }
     return item.categoria === category
   })
+  
   return filterByCategory
 }
 
