@@ -57,8 +57,18 @@ const buttonCancelNewOperation = document.getElementById("cancel-new-operation")
 const cardsSection = document.getElementById("cards-section")
 const buttonAddNewOperation= document.getElementById("add-new-operation")
 const categoriesSection = document.querySelector("#box-categories")
+
+const inputForNewDescription =document.querySelector("#input-description-name")
+const inputForNewAmount = document.querySelector("#input-amount-name")
+const selectType = document.querySelector("#input-for-type")
+const selectForCategory = document.querySelector("#select-for-category")
+const selectForDate = document.querySelector("#input-for-date")
+const formButtonAddNewOperation = document.getElementById("form-button-add-new-operation")
+
+
+
+
 openNewOperationButton.onclick = () => {
-    console.log ("boton para abrir modal")
     sectionNewOperation.classList.remove("is-hidden")
     categoriesSection.classList.add("is-hidden")
     cardsSection.classList.add("is-hidden")
@@ -72,53 +82,78 @@ buttonCancelNewOperation.onclick = () => {
 }
 
 // TEST
-const operaciones = [
+// const operaciones = [
 
-  {
-      descripcion: 'vinos',
-      categoria: 'comida',
-      fecha: '25/09/2021',
-      monto: 5000,
-      tipo: 'gasto',
-  },
-  {
-    descripcion: 'vinos2',
-    categoria: 'comida',
-    fecha: '25/09/2021',
-    monto: 5000,
-    tipo: 'gasto',
-},
-{
-  descripcion: 'vinos3',
-  categoria: 'comida',
-  fecha: '25/09/2021',
-  monto: 5000,
-  tipo: 'gasto',
-},
-{
-  descripcion: 'vinos4',
-  categoria: 'comida',
-  fecha: '25/09/2021',
-  monto: 10000,
-  tipo: 'gasto',
-}
-]
+//   {
+//       descripcion: 'vinos',
+//       categoria: 'comida',
+//       fecha: '25/09/2021',
+//       monto: 5000,
+//       tipo: 'gasto',
+//   },
+//   {
+//     descripcion: 'vinos2',
+//     categoria: 'comida',
+//     fecha: '25/09/2021',
+//     monto: 5000,
+//     tipo: 'gasto',
+// },
+// {
+//   descripcion: 'vinos3',
+//   categoria: 'comida',
+//   fecha: '25/09/2021',
+//   monto: 2323,
+//   tipo: 'gasto',
+// },
+// {
+//   descripcion: 'vinos4',
+//   categoria: 'comida',
+//   fecha: '25/09/2021',
+//   monto: 10000,
+//   tipo: 'gasto',
+// }
+// ]
 
 // Convertir objeto de JS a JSON
-const operacionesConvertidasAJSON = JSON.stringify(operaciones)
+// localStorage.setItem("operaciones", operacionesConvertidasAJSON)
 
-// Guardar en el almacenamiento local
-localStorage.setItem("operaciones", operacionesConvertidasAJSON)
+
+// const operacionesConvertidasAJSON = (object) => {
+//   const objetoConvertidoAJSON = JSON.stringify(object)
+//   return objetoConvertidoAJSON
+// }
+
+
+// let operation = []
 
 // Obtener info del local storage
 const dataLS = localStorage.getItem("operaciones")
 
 // Para convertir de JSON a JS
-const dataJS = JSON.parse(dataLS)
+const dataJS = JSON.parse(dataLS) || [];
+
+formButtonAddNewOperation.onclick = (e) => {
+  e.preventDefault()
+  const arrayClonado = [...dataJS];
+
+  const addOperation = {
+    descripcion: inputForNewDescription.value,
+    monto: inputForNewAmount.value,
+    tipo: selectType.value,
+    categoria: selectForCategory.value,
+    fecha: selectForDate.value,
+  }
+
+  arrayClonado.push(addOperation);
+
+  localStorage.setItem("operaciones", JSON.stringify(arrayClonado));
+  window.location.reload();
+}
 
 const llenarTabla = () => {
   const contenedor = document.getElementById('contenedor-de-lista')
   const htmlHolder = "";
+
   dataJS.forEach((item) => {
     contenedor.innerHTML += `<div class="columns is-multiline is-mobile is-vcentered">
     <div class="column is-3-tablet is-6-mobile">
