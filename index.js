@@ -74,12 +74,16 @@ const inputDateSelect = document.querySelector("#date-select")
 const inputOrderSelect = document.querySelector("#order-select")
 
 
+// Selectores para sección operaciones
+const reportsSection =  document.getElementById("seccion-reportes")
+const operationsImgContainer = document.getElementById("operations-img-container")
 
 
 openNewOperationButton.onclick = () => {
     sectionNewOperation.classList.remove("is-hidden")
     categoriesSection.classList.add("is-hidden")
     cardsSection.classList.add("is-hidden")
+    reportsSection.classList.add("is-hidden")
     
 }
 
@@ -113,11 +117,19 @@ formButtonAddNewOperation.onclick = (e) => {
   window.location.reload();
 }
 
+// Eliminar operaciones del LS
+const removeOperationLS = (posicion) => {
+  const newArray = [...dataJS];
+  newArray.splice(posicion, 1);
+  localStorage.setItem("operaciones", JSON.stringify(newArray));
+  window.location.reload();
+}
+
 const llenarTabla = (array) => {
   const contenedor = document.getElementById('contenedor-de-lista')
   let htmlHolder = "";
 
-  array.map((item) => {
+  array.map((item, index) => {
     htmlHolder += 
     `<div class="columns is-multiline is-mobile is-vcentered">
     <div class="column is-3-tablet is-6-mobile">
@@ -135,7 +147,7 @@ const llenarTabla = (array) => {
     <div class="column is-2-tablet is-6-mobile has-text-right">
       <p class="is-fullwidth">
         <a href="#" class="mr-3 is-size-7 edit-link">Editar</a>
-        <a href="#" class="is-size-7 delete-link">Eliminar</a>
+        <a href="#" class="is-size-7 delete-link" onclick={removeOperationLS(${index})}>Eliminar</a>
       </p>
     </div>
   </div>`;
@@ -171,7 +183,7 @@ const applyFilters = () => {
       console.log("usuario seleccono todos")
       return item
     }
-    return item.categoria = category
+    return item.categoria === category
   })
   return filterByCategory
 }
@@ -186,3 +198,19 @@ inputCategorySelect.onchange = () => {
   const filteredArray = applyFilters()
   llenarTabla(filteredArray)
 }
+
+
+
+llenarTabla()
+
+// Ocultar img si hay operaciones en LS
+const removeImg = () => {
+
+  if (localStorage.length > 0) {
+    operationsImgContainer.classList.add("is-hidden")
+  } else {
+    console.log("LS vacio")
+  }
+}
+
+removeImg()

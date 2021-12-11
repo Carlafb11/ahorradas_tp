@@ -124,7 +124,7 @@
       </article>
     </div>
 
-    <!-- Columna derecha -->
+    <!-- Columna derecha - OPERACIONES -->
     <div class="column is-7-widescreen is-8-desktop">
 
       <article class="box">
@@ -135,16 +135,16 @@
             <button type="button" class="button is-primary" id="button-new-operation">+ Nueva operación</button>
           </div>
         </div>
-        <div class="columns has-text-weight-semibold is-hidden-mobile">
+        <div class="is-hidden columns has-text-weight-semibold is-hidden-mobile" id="tabla-operaciones">
           <div class="column is-3">Descripción</div>
           <div class="column is-3">Categoría</div>
           <div class="column is-2 has-text-right">Fecha</div>
           <div class="column is-2 has-text-right">Monto</div>
           <div class="column is-2 has-text-right">Acciones</div>
         </div>
-        <div id="contenedor-de-lista" />
 
-        <div class="is-hidden">
+        <div id="operations-img-container">
+
           <figure class="image is-3by1 my-6">
             <img src="https://frontend-proyecto-ahorradas.adaitw.org/imgs/wallet.svg">
           </figure>
@@ -154,6 +154,8 @@
             <p class="has-text-centered">Cambia los filtros o agrega operaciones</p>
           </div>
         </div>
+
+        <div id="contenedor-de-lista" />
 
       </article>
 
@@ -178,8 +180,6 @@
             Editar
           </button>
 
-
-
         </div>
 
         <div class="is-flex is-justify-content-space-between" id="lista-categorias">
@@ -200,9 +200,6 @@
         </div>
     </section>
           
-          
-    
-
   </section>
 
   <section class="section columns is-hidden">
@@ -242,7 +239,7 @@
 
   <!-- Seccion Nueva Operacion -->
 
-  <section class="section columns" id="seccion-nueva-operacion">
+  <section class="is-hidden section columns" id="seccion-nueva-operacion">
     <div class="column is-10 is-offset-1-widescreen">
       <article class="box">
         <div class="column">
@@ -314,7 +311,7 @@
 
   
   <!-- Reportes -->
-  <section class=" section columns" id="seccion-nueva-operacion">
+  <section class="is-hidden section columns" id="seccion-reportes">
     <div class="column is-10 is-offset-1-widescreen">
       <article class="box">
         <h2 class="title is-2 has-text-weight-bold">Reportes</h2>
