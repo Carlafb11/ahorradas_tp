@@ -54,13 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
 const sectionNewOperation = document.getElementById("seccion-nueva-operacion")
 const openNewOperationButton = document.getElementById("button-new-operation")
 const buttonCancelNewOperation = document.getElementById("cancel-new-operation")
-const buttonAddNewOperation= document.getElementById("add-new-operation")
 const cardsSection = document.getElementById("cards-section")
-const categoriesSection = document.querySelector("box-categories")
-
+const buttonAddNewOperation= document.getElementById("add-new-operation")
+const categoriesSection = document.querySelector("#box-categories")
 openNewOperationButton.onclick = () => {
     console.log ("boton para abrir modal")
     sectionNewOperation.classList.remove("is-hidden")
+    categoriesSection.classList.add("is-hidden")
     cardsSection.classList.add("is-hidden")
     
 }
@@ -68,6 +68,7 @@ openNewOperationButton.onclick = () => {
 buttonCancelNewOperation.onclick = () => {
     sectionNewOperation.classList.add("is-hidden")
     cardsSection.classList.remove("is-hidden")
+    
 }
 
 // TEST
@@ -93,3 +94,6 @@ const operaciones = [
 // Convertir objeto de JS a JSON
 const operacionesConvertidasAJSON = JSON.stringify(operaciones)
 localStorage.setItem("operaciones", operacionesConvertidasAJSON)
+const addNewOperation = () => {
+
+}

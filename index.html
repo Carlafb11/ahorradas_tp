@@ -8,7 +8,6 @@
   <title>AhorrADAs</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <link rel="icon" href="http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22" type="icon">
-  <link rel="stylesheet" href="style.css">
   <script src="https://kit.fontawesome.com/628a30b0fe.js" crossorigin="anonymous"></script>
 </head>
 
@@ -186,7 +185,7 @@
   </section>
 
   <!-- Categorías -->
-  <section class="section columns" id="box-categories">
+  <section class="is-hidden section columns" id="box-categories">
     <div class="column is-10 is-offset-1-widescreen">
       <article class="box">
         <div class="column">
@@ -194,22 +193,70 @@
         </div>
 
         <label for="category-name" class="label">Nombre</label>
-        <div class="control is-expanded">
-          <input id="category-name" class="input is-small" type="text">
+        <div class="control is-expanded columns">
+
+          <input class="input is-one-quarter" type="text">
+
+          <button class="button is-success" id="agregar-categoria-boton">
+            Editar
+          </button>
+
+
+
         </div>
 
-        <div id="lista-categorias">
-          <span class="tag is-primary is-light">Link</span>
-          <span class="tag is-primary is-light">Salidas</span>
-          <span class="tag is-primary is-light">Educación</span>
-          <span class="tag is-primary is-light">Transporte</span>
-          <span class="tag is-primary is-light">Trabajo</span>
-          
+        <div class="is-flex is-justify-content-space-between" id="lista-categorias">
+          <div class="lista-categorias-vertical is-flex is-flex-direction-column">
+
+            <span class="tag is-primary is-light">Salidas</span>
+            <span class="tag is-primary is-light">Educación</span>
+            <span class="tag is-primary is-light">Transporte</span>
+            <span class="tag is-primary is-light">Trabajo</span>
+
+          </div>
+
+          <div class="botones-editar-eliminar-categorias is-flex is-flex-direction-column">
+            <button class="mr-4 is-size-7 edit-link">Editar</button>
+          </div>
+
+
         </div>
     </section>
           
           
     
+
+  </section>
+
+  <section class="section columns is-hidden">
+
+    <div class="column is-10 is-offset-1-widescreen">
+      <article class="box">
+        <h2 class="title is-2 has-text-weight-bold">Editar categoría</h2>
+        <label class="has-text-weight-bold">Nombre</label>
+
+        <div class="field mt-5">
+          <div class="control column is-centered">
+            <div class="columns is-half">
+              <input class="input is-one-quarter" type="text" placeholder="Nombre de nueva categoría">
+            </div>
+            <div class="control is-flex is-justify-content-flex-end">
+              <button class="button is-success" id="agregar-categoria-boton">
+                Editar
+              </button>
+
+              <button class="button is-light" id="agregar-categoria-boton">
+                Cancelar
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
     </div>
 
   </section>
@@ -226,7 +273,8 @@
 
           <label class="label">Descripción</label>
           <div>
-            <input id="descripcion" class="input is-small" type="text" placeholder="Ingresa la descripción">
+            <input id="descripcion" class="input is-small" type="text" placeholder="Ingresa la descripción" id="input-new-operation-name"
+            
           </div>
 
           <label for="monto" class="label">Monto</label>
@@ -258,16 +306,16 @@
                 <option value="transporte">Transporte</option>
                 <option value="trabajo">Trabajo</option>
               </select>
-          </div>
+            </div>
 
             <label class="label">Fecha</label>
-              <div class="control">
-                <input id="input-fecha" class="input is-small" type="date">
-              </div>
+            <div class="control">
+              <input id="input-fecha" class="input is-small" type="date">
+            </div>
 
-              <div class="column">
-                <div class="column has-text-right-tablet">
-      
+            <div class="column">
+              <div class="column has-text-right-tablet">
+
                 <button class="button is-light " id="cancel-new-operation">
                   Cancelar
                 </button>
@@ -275,7 +323,7 @@
                   Agregar
                 </button>
               </div>
-          </div>
+            </div>
       </article>
     </div>
     <!--  Final de Seccion Nueva Operacion -->
