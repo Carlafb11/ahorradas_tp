@@ -99,6 +99,15 @@ const dataLS = localStorage.getItem("operaciones")
 // Para convertir de JSON a JS
 const dataJS = JSON.parse(dataLS) || [];
 
+// Ocultar img si hay operaciones en LS
+const removeImg = () => {
+  if (dataJS.length > 0) {
+    operationsImgContainer.classList.add("is-hidden")
+  } 
+}
+
+removeImg()
+
 formButtonAddNewOperation.onclick = (e) => {
   e.preventDefault()
   const arrayClonado = [...dataJS];
@@ -122,14 +131,18 @@ const removeOperationLS = (posicion) => {
   const newArray = [...dataJS];
   newArray.splice(posicion, 1);
   localStorage.setItem("operaciones", JSON.stringify(newArray));
+  localStorage.setItem("operacionesConFiltro", JSON.stringify(newArray));
   window.location.reload();
 }
 
-const llenarTabla = (array) => {
+const llenarTabla = () => {
   const contenedor = document.getElementById('contenedor-de-lista')
   let htmlHolder = "";
+  //Obtener operaciones filtradas desde LS
+  const dataFiltrada = JSON.parse(localStorage.getItem("operacionesConFiltro"));
+  const arrayCorrecto = dataFiltrada || dataJS;
 
-  array.map((item, index) => {
+  arrayCorrecto.map((item, index) => {
     htmlHolder += 
     `<div class="columns is-multiline is-mobile is-vcentered">
     <div class="column is-3-tablet is-6-mobile">
@@ -155,7 +168,26 @@ const llenarTabla = (array) => {
 contenedor.innerHTML=htmlHolder
 }
 
-llenarTabla(dataJS)
+llenarTabla()
+
+const filtrarData = (tipoFiltro, value) => {
+  let newArray = [...dataJS];
+
+  //filtro de type
+  if (tipoFiltro === "type") {
+    if (value === "all") {
+      newArray = [...dataJS]
+    } else {
+      const prueba =
+        newArray.filter((item) => item.tipo === value);
+      newArray = prueba;
+    }
+  }
+  
+
+  localStorage.setItem("operacionesConFiltro", JSON.stringify(newArray));
+  llenarTabla();
+}
 
 
 
@@ -167,51 +199,34 @@ llenarTabla(dataJS)
 // const inputOrderSelect = document.querySelector("#order-select")
 
 
-const applyFilters = () => {
-  // const type = inputTypeSelect.value
-  // const filterByType = dataJS.filter((item)=>{
-  //   if(type === "all") {
-  //     return item
-  //   }
+// const applyFilters = () => {
+//   // const type = inputTypeSelect.value
+//   // const filterByType = dataJS.filter((item)=>{
+//   //   if(type === "all") {
+//   //     return item
+//   //   }
 
-  //   return item.tipo === type
-  // })
-
-  const category = selectForCategory.value
-  const filterByCategory = dataJS.filter((item)=> {
-    if (category==="all") {
-      console.log("usuario seleccono todos")
-      return item
-    }
-    return item.categoria === category
-  })
+//   //   return item.tipo === type
+//   // })
+//   const newArray = [...dataJS];
+//   const category = selectForCategory.value
+//   const filterByCategory = newArray.filter((item)=> {
+//     if (category==="all") {
+//       console.log("usuario seleccono todos")
+//       return item
+//     }
+//     return item.categoria === category
+//   })
   
-  return filterByCategory
+//   return filterByCategory
+// }
+
+
+inputTypeSelect.onchange = (event) => {
+  filtrarData('type', event.target.value)
 }
 
-
-// inputTypeSelect.onchange = ()=> {
+// inputCategorySelect.onchange = () => {
 //   // const filteredArray = applyFilters()
 //   // llenarTabla(filteredArray)
 // }
-
-inputCategorySelect.onchange = () => {
-  const filteredArray = applyFilters()
-  llenarTabla(filteredArray)
-}
-
-
-
-llenarTabla()
-
-// Ocultar img si hay operaciones en LS
-const removeImg = () => {
-
-  if (localStorage.length > 0) {
-    operationsImgContainer.classList.add("is-hidden")
-  } else {
-    console.log("LS vacio")
-  }
-}
-
-removeImg()
