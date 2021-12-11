@@ -136,15 +136,48 @@
           <div class="column has-text-right-desktop">
             <button type="button" class="button is-primary" id="button-new-operation">+ Nueva operación</button>
           </div>
+        </div>
+        <div class="columns has-text-weight-semibold is-hidden-mobile">
+          <div class="column is-3">Descripción</div>
+          <div class="column is-3">Categoría</div>
+          <div class="column is-2 has-text-right">Fecha</div>
+          <div class="column is-2 has-text-right">Monto</div>
+          <div class="column is-2 has-text-right">Acciones</div>
+        </div>
+        <div id="">
+          <div class="columns is-multiline is-mobile is-vcentered">
+            <div class="column is-3-tablet is-6-mobile">
+              <h3 class="has-text-weight-semibold" id="descripcion">Test</h3>
+            </div>
+            <div class="column is-3-tablet is-6-mobile has-text-right-mobile">
+              <span class="tag is-primary is-light" id="categoria">Trabajo</span>
+            </div>
+            <div class="column is-2-tablet has-text-grey is-hidden-mobile has-text-right-tablet" id="fecha">
+              11/12/2021
+            </div>
+            <div class="column is-2-tablet is-6-mobile has-text-weight-bold has-text-right-tablet is-size-4-mobile has-text-success" id="monto">
+              +$1200
+            </div>
+            <div class="column is-2-tablet is-6-mobile has-text-right">
+              <p class="is-fullwidth">
+                <a href="#" class="mr-3 is-size-7 edit-link">Editar</a>
+                <a href="#" class="is-size-7 delete-link">Eliminar</a>
+              </p>
+            </div>
+          </div>
+        </div>
 
+        <div class="is-hidden">
+          <figure class="image is-3by1 my-6">
+            <img src="https://frontend-proyecto-ahorradas.adaitw.org/imgs/wallet.svg">
+          </figure>
+  
+          <div class="my-6">
+            <h4 class=" has-text-centered has-text-weight-semibold is-size-4 ">Sin resultados</h4>
+            <p class="has-text-centered">Cambia los filtros o agrega operaciones</p>
+          </div>
         </div>
-        <figure class="image is-3by1 my-6">
-          <img src="https://frontend-proyecto-ahorradas.adaitw.org/imgs/wallet.svg">
-        </figure>
-        <div class="my-6">
-          <h4 class=" has-text-centered has-text-weight-semibold is-size-4 ">Sin resultados</h4>
-          <p class="has-text-centered">Cambia los filtros o agrega operaciones</p>
-        </div>
+
       </article>
 
     </div>
@@ -232,7 +265,7 @@
 
   <!-- Seccion Nueva Operacion -->
 
-  <section class="is-hidden section columns" id="seccion-nueva-operacion">
+  <section class="section columns" id="seccion-nueva-operacion">
     <div class="column is-10 is-offset-1-widescreen">
       <article class="box">
         <div class="column">
