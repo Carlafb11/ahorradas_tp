@@ -57,6 +57,7 @@ const buttonCancelNewOperation = document.getElementById("cancel-new-operation")
 const cardsSection = document.getElementById("cards-section")
 const buttonAddNewOperation= document.getElementById("add-new-operation")
 const categoriesSection = document.querySelector("#box-categories")
+const contenedor = document.getElementById('contenedor-de-lista')
 
 //Selectores para Ventana de Agregar Nueva Operacion 
 
@@ -97,7 +98,7 @@ buttonCancelNewOperation.onclick = () => {
 const dataLS = localStorage.getItem("operaciones")
 
 // Para convertir de JSON a JS
-const dataJS = JSON.parse(dataLS) || [];
+const dataJS = JSON.parse(dataLS) || []
 
 // Ocultar img si hay operaciones en LS
 const removeImg = () => {
@@ -108,9 +109,10 @@ const removeImg = () => {
 
 removeImg()
 
+// FUNCIONALIDAD PARA AGREGAR UNA NUEVA OPERACION.
 formButtonAddNewOperation.onclick = (e) => {
   e.preventDefault()
-  const arrayClonado = [...dataJS];
+  const arrayClonado = [...dataJS]
 
   const addOperation = {
     descripcion: inputForNewDescription.value,
@@ -120,10 +122,10 @@ formButtonAddNewOperation.onclick = (e) => {
     fecha: selectForDate.value,
   }
 
-  arrayClonado.push(addOperation);
+  arrayClonado.push(addOperation)
 
   localStorage.setItem("operaciones", JSON.stringify(arrayClonado));
-  window.location.reload();
+  window.location.reload()
 }
 
 // Eliminar operaciones del LS
@@ -135,14 +137,13 @@ const removeOperationLS = (posicion) => {
   window.location.reload();
 }
 
-const llenarTabla = () => {
-  const contenedor = document.getElementById('contenedor-de-lista')
-  let htmlHolder = "";
-  //Obtener operaciones filtradas desde LS
-  const dataFiltrada = JSON.parse(localStorage.getItem("operacionesConFiltro"));
-  const arrayCorrecto = dataFiltrada || dataJS;
 
-  arrayCorrecto.map((item, index) => {
+// FUNCIONALIDAD PARA AGREGAR CREAR LA TABLA
+const llenarTabla = (array) => {
+  
+  let htmlHolder = ""
+
+  array.map((item, index) => {
     htmlHolder += 
     `<div class="columns is-multiline is-mobile is-vcentered">
     <div class="column is-3-tablet is-6-mobile">
@@ -159,74 +160,47 @@ const llenarTabla = () => {
     </div>
     <div class="column is-2-tablet is-6-mobile has-text-right">
       <p class="is-fullwidth">
-        <a href="#" class="mr-3 is-size-7 edit-link">Editar</a>
+        <a href="#" class="mr-3 is-size-7 edit-link" id="caca">Editar</a>
         <a href="#" class="is-size-7 delete-link" onclick={removeOperationLS(${index})}>Eliminar</a>
       </p>
     </div>
-  </div>`;
+  </div>`
   })
 contenedor.innerHTML=htmlHolder
 }
 
-llenarTabla()
+llenarTabla(dataJS)
+ 
 
-const filtrarData = (tipoFiltro, value) => {
-  let newArray = [...dataJS];
 
-  //filtro de type
-  if (tipoFiltro === "type") {
-    if (value === "all") {
-      newArray = [...dataJS]
-    } else {
-      const prueba =
-        newArray.filter((item) => item.tipo === value);
-      newArray = prueba;
-    }
-  }
-  
+const applyFilters = () => {
+    const type = inputTypeSelect.value
+    const operationsFilteredByType = dataJS.filter((item)=> {
+      if(type==="all") {
+        return item
+      }
+    return item.tipo === type
 
-  localStorage.setItem("operacionesConFiltro", JSON.stringify(newArray));
-  llenarTabla();
+    })
+
+    const category = inputCategorySelect.value
+    const operationsFilteredByCategory = operationsFilteredByType.filter((item)=>{
+      if (category === "todos") {
+        return item
+      }
+      return item.categoria === category
+    })
+  return operationsFilteredByCategory
 }
 
 
-
-///////////////// FUNCIONALIDAD DE FILTROS ✨ /////////////
-
-// const inputTypeSelect = document.querySelector("#type-select")
-// const inputCategorySelect = document.querySelector("#category-select")
-// const inputDateSelect = document.querySelector("#date-select")
-// const inputOrderSelect = document.querySelector("#order-select")
-
-
-// const applyFilters = () => {
-//   // const type = inputTypeSelect.value
-//   // const filterByType = dataJS.filter((item)=>{
-//   //   if(type === "all") {
-//   //     return item
-//   //   }
-
-//   //   return item.tipo === type
-//   // })
-//   const newArray = [...dataJS];
-//   const category = selectForCategory.value
-//   const filterByCategory = newArray.filter((item)=> {
-//     if (category==="all") {
-//       console.log("usuario seleccono todos")
-//       return item
-//     }
-//     return item.categoria === category
-//   })
-  
-//   return filterByCategory
-// }
-
-
-inputTypeSelect.onchange = (event) => {
-  filtrarData('type', event.target.value)
+inputTypeSelect.onchange = () => {
+const filteredArray = applyFilters()
+llenarTabla(filteredArray)
 }
 
-// inputCategorySelect.onchange = () => {
-//   // const filteredArray = applyFilters()
-//   // llenarTabla(filteredArray)
-// }
+inputCategorySelect.onchange = ()=> {
+const filteredArray =applyFilters()
+llenarTabla(filteredArray)
+}
+
