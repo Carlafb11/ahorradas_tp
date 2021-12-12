@@ -172,7 +172,7 @@ contenedor.innerHTML=htmlHolder
 llenarTabla(dataJS)
  
 
-
+// FUNCIONALIDAD PARA APLICAR FILTROS 
 const applyFilters = () => {
     const type = inputTypeSelect.value
     const operationsFilteredByType = dataJS.filter((item)=> {
