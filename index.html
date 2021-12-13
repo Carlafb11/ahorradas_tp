@@ -27,9 +27,9 @@
     </div>
     <div class="navbar-menu">
       <div class="navbar-end">
-        <a href="#" class="navbar-item"><i class="fas fa-chart-line mr-2" aria-hidden="true"></i> Balance</a>
-        <a href="#" class="navbar-item"><i class="fas fa-tag mr-2" aria-hidden="true"></i> Categorías</a>
-        <a href="#" class="navbar-item"><i class="fas fa-chart-pie mr-2" aria-hidden="true"></i>Reportes </a>
+        <a href="#" class="navbar-item" id="balance-window"><i class="fas fa-chart-line mr-2" aria-hidden="true" ></i> Balance</a>
+        <a href="#" class="navbar-item" id="categories-window"><i class="fas fa-tag mr-2" aria-hidden="true" ></i> Categorías</a>
+        <a href="#" class="navbar-item" id="reports-window"><i class="fas fa-chart-pie mr-2" aria-hidden="true" ></i>Reportes </a>
       </div>
     </div>
   </nav>
@@ -164,7 +164,7 @@
   </section>
 
   <!-- Categorías -->
-  <section class="section columns" id="box-categories">
+  <section class="section columns is-hidden" id="box-categories">
     <div class="column is-10 is-offset-1-widescreen">
       <article class="box">
         <div class="column">
@@ -173,31 +173,33 @@
 
         <label for="category-name" class="label">Nombre</label>
         <div class="control is-expanded columns">
+          <div class="column is-four-fifths">
 
-          <input class="input is-one-quarter" type="text">
-
-          <button class="button is-success" id="agregar-categoria-boton">
-            Editar
-          </button>
-
-        </div>
-
-        <div class="is-flex is-justify-content-space-between" id="lista-categorias">
-          <div class="lista-categorias-vertical is-flex is-flex-direction-column">
-
-            <span class="tag is-primary is-light">Salidas</span>
-            <span class="tag is-primary is-light">Educación</span>
-            <span class="tag is-primary is-light">Transporte</span>
-            <span class="tag is-primary is-light">Trabajo</span>
+            <input class="input " type="text">
 
           </div>
-
-          <div class="botones-editar-eliminar-categorias is-flex is-flex-direction-column">
-            <button class="mr-4 is-size-7 edit-link">Editar</button>
+          
+          <div class="column has-text-right-tablet" >
+            <button class="button is-success" id="form-button-add-new-category">
+              Agregar
+            </button>
           </div>
-
-
         </div>
+
+        <div id="contenedor-de-categorias"><div class="columns is-multiline is-mobile is-vcentered">
+          <div class="column is-3-tablet is-6-mobile has-text-right-mobile">
+            <span class="tag is-primary is-light" id="category">comida</span>
+          </div>
+        
+          <div class="column is-2-tablet is-6-mobile has-text-right">
+            <p class="is-fullwidth">
+              <a href="#" class="mr-3 is-size-7 edit-link" id="edit-category">Editar</a>
+              <a href="#" class="is-size-7 delete-link">Eliminar</a>
+            </p>
+          </div>
+        </div></div>
+
+
     </section>
           
   </section>
@@ -273,6 +275,7 @@
           <div class="control">
             <div class="select is-fullwidth">
               <select id="select-for-category">
+                <option value="todos">Todas</option>
                 <option value="comida">Comidas</option>
                 <option value="servicios">Servicios</option>
                 <option value="salidas">Salidas</option>

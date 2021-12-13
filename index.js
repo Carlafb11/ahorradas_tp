@@ -56,6 +56,8 @@ const openNewOperationButton = document.getElementById("button-new-operation")
 const buttonCancelNewOperation = document.getElementById("cancel-new-operation")
 const cardsSection = document.getElementById("cards-section")
 const buttonAddNewOperation= document.getElementById("add-new-operation")
+const openCategoriesWindow = document.getElementById("categories-window")
+console.log(openCategoriesWindow)
 const categoriesSection = document.querySelector("#box-categories")
 const contenedor = document.getElementById('contenedor-de-lista')
 
@@ -84,7 +86,7 @@ openNewOperationButton.onclick = () => {
     sectionNewOperation.classList.remove("is-hidden")
     categoriesSection.classList.add("is-hidden")
     cardsSection.classList.add("is-hidden")
-    reportsSection.classList.add("is-hidden")
+
     
 }
 
@@ -92,6 +94,12 @@ buttonCancelNewOperation.onclick = () => {
     sectionNewOperation.classList.add("is-hidden")
     cardsSection.classList.remove("is-hidden")
     
+}
+
+openCategoriesWindow.onclick =()=> {
+  console.log("fdjnkd")
+  categoriesSection.classList.toggle("is-hidden")
+  cardsSection.classList.toggle("is-hidden")
 }
 
 // Obtener info del local storage
@@ -159,7 +167,7 @@ const llenarTabla = (array) => {
     </div>
     <div class="column is-2-tablet is-6-mobile has-text-right">
       <p class="is-fullwidth">
-        <a href="#" class="mr-3 is-size-7 edit-link" id="caca">Editar</a>
+        <a href="#" class="mr-3 is-size-7 edit-link" id="edit-operation">Editar</a>
         <a href="#" class="is-size-7 delete-link" onclick={removeOperationLS(${index})}>Eliminar</a>
       </p>
     </div>
