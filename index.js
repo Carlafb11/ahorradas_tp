@@ -210,7 +210,7 @@ const applyFilters = () => {
     
   return finalArray
 }
-
+ 
 
 inputTypeSelect.onchange = () => {
 const filteredArray = applyFilters()
