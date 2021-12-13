@@ -60,7 +60,7 @@ const categoriesSection = document.querySelector("#box-categories")
 const contenedor = document.getElementById('contenedor-de-lista')
 
 //Selectores para Ventana de Agregar Nueva Operacion 
-
+const formNewOperation = document.getElementById("form-new-operation")
 const inputForNewDescription =document.querySelector("#input-description-name")
 const inputForNewAmount = document.querySelector("#input-amount-name")
 const selectType = document.querySelector("#input-for-type")
@@ -110,7 +110,7 @@ const removeImg = () => {
 removeImg()
 
 // FUNCIONALIDAD PARA AGREGAR UNA NUEVA OPERACION.
-formButtonAddNewOperation.onclick = (e) => {
+formNewOperation.onsubmit = (e) => {
   e.preventDefault()
   const arrayClonado = [...dataJS]
 
@@ -133,7 +133,6 @@ const removeOperationLS = (posicion) => {
   const newArray = [...dataJS];
   newArray.splice(posicion, 1);
   localStorage.setItem("operaciones", JSON.stringify(newArray));
-  localStorage.setItem("operacionesConFiltro", JSON.stringify(newArray));
   window.location.reload();
 }
 
@@ -190,7 +189,18 @@ const applyFilters = () => {
       }
       return item.categoria === category
     })
-  return operationsFilteredByCategory
+
+    const finalArray = operationsFilteredByCategory.map((item)=> {
+      const newElement = {...item}
+      newElement.fecha = new Date(item.fecha).toLocaleDateString()
+      return newElement
+    })
+
+    finalArray.sort ((a,b)=> {
+      return new Date(a.fecha) - new Date(b.fecha)
+    })
+    
+  return finalArray
 }
 
 
@@ -204,3 +214,8 @@ const filteredArray =applyFilters()
 llenarTabla(filteredArray)
 }
 
+
+inputDateSelect.onchange = () => {
+  const filteredArray =applyFilters()
+  llenarTabla(filteredArray)
+}
