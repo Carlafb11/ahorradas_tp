@@ -5,7 +5,7 @@
 ### CONTENIDO
 ¡Hola! Este es el segundo trabajo práctico con Javascript, el cual consiste en poder realizar operaciones sobre gastos y ganancias, en el cual se puede llevar registro de la informacion de tus gastos e ingresos
 
-Tecnologíass usadas
+Tecnologías usadas
 1. HTML
 2. CSS3
 3. JAVASCRIPT
@@ -21,6 +21,7 @@ Hi! This is the second project we've made using Javascript in the course of Ada.
 Thanks for watching.
 
 Tecnologies
+
 This project was created with
 
 1. HTML
