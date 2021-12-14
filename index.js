@@ -1,5 +1,6 @@
 ///////////////// SELECTORES ✨ /////////////
-
+const balanceButton = document.getElementById("balance-window")
+const reportsButton = document.getElementById("reports-window")
 const sectionNewOperation = document.getElementById("seccion-nueva-operacion")
 const openNewOperationButton = document.getElementById("button-new-operation")
 
@@ -40,8 +41,30 @@ const buttonAddNewCategory = document.getElementById("form-button-add-new-catego
 const inputTextNewCategory = document.getElementById("input-text-add-new-category")
 const saveCategoryName = document.getElementById("save-select-for-category")
 
+// Nav Bar buttons
+balanceButton.onclick = () => {
+  if (cardsSection) {
+    cardsSection.classList.remove("is-hidden")
+    categoriesSection.classList.add("is-hidden")
+    reportsSection.classList.add("is-hidden")
+  }
+}
 
+reportsButton.onclick = () => {
+  if (categoriesSection) {
+    cardsSection.classList.add("is-hidden")
+    categoriesSection.classList.add("is-hidden")
+    reportsSection.classList.remove("is-hidden")
+  }
+}
 
+openCategoriesWindow.onclick = () => {
+  if (categoriesSection) {
+    cardsSection.classList.add("is-hidden")
+    reportsSection.classList.add("is-hidden")
+    categoriesSection.classList.remove("is-hidden")
+  }
+}
 
 // FUNCIONALIDAD AGREGAR CATEGORIES
 
@@ -129,11 +152,6 @@ buttonCancelNewOperation.onclick = () => {
     sectionNewOperation.classList.add("is-hidden")
     cardsSection.classList.remove("is-hidden")
     
-}
-
-openCategoriesWindow.onclick =()=> {
-  categoriesSection.classList.toggle("is-hidden")
-  cardsSection.classList.toggle("is-hidden")
 }
 
 // Obtener info del local storage
@@ -321,5 +339,3 @@ inputDateSelect.onchange = () => {
   const filteredArray =applyFilters()
   llenarTabla(filteredArray)
 }
-
-
