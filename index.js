@@ -1,4 +1,3 @@
- 
 ///////////////// SELECTORES ✨ /////////////
 
 const sectionNewOperation = document.getElementById("seccion-nueva-operacion")
