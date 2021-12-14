@@ -53,11 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const sectionNewOperation = document.getElementById("seccion-nueva-operacion")
 const openNewOperationButton = document.getElementById("button-new-operation")
+
 const buttonCancelNewOperation = document.getElementById("cancel-new-operation")
 const cardsSection = document.getElementById("cards-section")
 const buttonAddNewOperation= document.getElementById("add-new-operation")
 const openCategoriesWindow = document.getElementById("categories-window")
-console.log(openCategoriesWindow)
 const categoriesSection = document.querySelector("#box-categories")
 const contenedor = document.getElementById('contenedor-de-lista')
 
@@ -80,6 +80,7 @@ const inputOrderSelect = document.querySelector("#order-select")
 // Selectores para sección operaciones
 const reportsSection =  document.getElementById("seccion-reportes")
 const operationsImgContainer = document.getElementById("operations-img-container")
+const tableTitles = document.getElementById("tabla-operaciones")
 
 
 openNewOperationButton.onclick = () => {
@@ -114,7 +115,6 @@ const removeImg = () => {
     operationsImgContainer.classList.add("is-hidden")
   } 
 }
-
 removeImg()
 
 // FUNCIONALIDAD PARA AGREGAR UNA NUEVA OPERACION.
@@ -132,23 +132,35 @@ formNewOperation.onsubmit = (e) => {
 
   arrayClonado.push(addOperation)
 
-  localStorage.setItem("operaciones", JSON.stringify(arrayClonado));
+  localStorage.setItem("operaciones", JSON.stringify(arrayClonado))
   window.location.reload()
 }
 
 // Eliminar operaciones del LS
 const removeOperationLS = (posicion) => {
-  const newArray = [...dataJS];
-  newArray.splice(posicion, 1);
-  localStorage.setItem("operaciones", JSON.stringify(newArray));
-  window.location.reload();
+  const newArrayOperations = [...dataJS]
+  newArrayOperations.splice(posicion, 1)
+  localStorage.setItem("operaciones", JSON.stringify(newArrayOperations))
+  localStorage.setItem("operacionesConFiltro", JSON.stringify(newArrayOperations))
+  window.location.reload()
+}
+
+// Editar operaciones del LS
+const editOperationsLS = (posicion) => {
+  const newArrayOperations = [...dataJS]
+
+  localStorage.setItem("operaciones", JSON.stringify(newArrayOperations))
+  localStorage.setItem("operacionesConFiltro", JSON.stringify(newArrayOperations))
+  window.location.reload()
 }
 
 
 // FUNCIONALIDAD PARA AGREGAR CREAR LA TABLA
 const llenarTabla = (array) => {
-  
-  let htmlHolder = ""
+  let htmlHolder = "";
+  //Obtener operaciones filtradas desde LS
+  // const dataFiltrada = JSON.parse(localStorage.getItem("operacionesConFiltro"))
+  // const arrayCorrecto = dataFiltrada || dataJS
 
   array.map((item, index) => {
     htmlHolder += 
@@ -167,13 +179,14 @@ const llenarTabla = (array) => {
     </div>
     <div class="column is-2-tablet is-6-mobile has-text-right">
       <p class="is-fullwidth">
-        <a href="#" class="mr-3 is-size-7 edit-link" id="edit-operation">Editar</a>
+        <a href="#" class="mr-3 is-size-7 edit-link" id="edit-operation-button" onclick={editOperationsLS(${index})}>Editar</a>
         <a href="#" class="is-size-7 delete-link" onclick={removeOperationLS(${index})}>Eliminar</a>
       </p>
     </div>
   </div>`
   })
-contenedor.innerHTML=htmlHolder
+  contenedor.innerHTML=htmlHolder
+  tableTitles.classList.remove("is-hidden")
 }
 
 llenarTabla(dataJS)
@@ -210,7 +223,7 @@ const applyFilters = () => {
     
   return finalArray
 }
- 
+
 
 inputTypeSelect.onchange = () => {
 const filteredArray = applyFilters()
