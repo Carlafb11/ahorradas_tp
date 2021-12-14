@@ -81,6 +81,11 @@ const inputOrderSelect = document.querySelector("#order-select")
 const reportsSection =  document.getElementById("seccion-reportes")
 const operationsImgContainer = document.getElementById("operations-img-container")
 
+// Selectores de seccion Categorias
+
+const buttonAddNewCategory = document.getElementById("form-button-add-new-category")
+const inputTextNewCategory = document.getElementById("input-text-add-new-category")
+
 
 openNewOperationButton.onclick = () => {
     sectionNewOperation.classList.remove("is-hidden")
@@ -227,3 +232,47 @@ inputDateSelect.onchange = () => {
   const filteredArray =applyFilters()
   llenarTabla(filteredArray)
 }
+
+
+// FUNCIONALIDAD PARA CATEGORIAS 
+
+const categories = ["comida","servicios","salidas","educacion","transporte","trabajo" ]
+
+// const buttonAddNewCategory = document.getElementById("form-button-add-new-category")
+// const inputTextNewCategory = document.getElementById("input-text-add-new-category")
+
+
+buttonAddNewCategory.onclick = () => {
+  const newCategory= inputTextNewCategory.value
+  console.log(newCategory)
+  categories.push(newCategory)
+  includeCategoriestoSelect()
+  inputTextNewCategory.value = ""
+  const categoriesToJSON = JSON.stringify(categories)
+  localStorage.setItem("categories", categoriesToJSON)
+
+}
+
+const getCategories =()=> {
+  const addCategoriesLS = localStorage.getItem("categories")
+  if (addCategoriesLS === null) {
+    return categories
+  }
+  else {
+    return JSON.parse(addCategoriesLS)
+  }
+}
+
+const includeCategoriestoSelect = () => {
+  const categories = getCategories()
+  const categoriesToString = categories.reduce ((acc, element)=> {
+    return acc + `<option value ="${element}">${element}</option>`
+  }, "")
+  selectForCategory.innerHTML = categoriesToString
+}
+ includeCategoriestoSelect()
+
+
+ const addCategoriesToHTML = () => {
+   
+ }
