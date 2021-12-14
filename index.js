@@ -81,6 +81,8 @@ const inputOrderSelect = document.querySelector("#order-select")
 const reportsSection =  document.getElementById("seccion-reportes")
 const operationsImgContainer = document.getElementById("operations-img-container")
 const tableTitles = document.getElementById("tabla-operaciones")
+const selectExpense = document.getElementById("select-expense")
+const selectGain = document.getElementById("select-gain")
 
 
 openNewOperationButton.onclick = () => {
@@ -174,8 +176,8 @@ const llenarTabla = (array) => {
     <div class="column is-2-tablet has-text-grey is-hidden-mobile has-text-right-tablet" id="date">
       ${item.fecha}
     </div>
-    <div class="column is-2-tablet is-6-mobile has-text-weight-bold has-text-right-tablet is-size-4-mobile has-text-success" id="amount">
-      ${item.monto}
+    <div class="column is-2-tablet is-6-mobile has-text-weight-bold has-text-right-tablet is-size-4-mobile" id="amount">
+      $${item.monto}
     </div>
     <div class="column is-2-tablet is-6-mobile has-text-right">
       <p class="is-fullwidth">
@@ -186,7 +188,11 @@ const llenarTabla = (array) => {
   </div>`
   })
   contenedor.innerHTML=htmlHolder
-  tableTitles.classList.remove("is-hidden")
+
+  if (dataJS.length >= 1) {
+    tableTitles.classList.remove("is-hidden")
+  }
+
 }
 
 llenarTabla(dataJS)
