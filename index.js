@@ -242,16 +242,6 @@ const categories = ["comida","servicios","salidas","educacion","transporte","tra
 // const inputTextNewCategory = document.getElementById("input-text-add-new-category")
 
 
-buttonAddNewCategory.onclick = () => {
-  const newCategory= inputTextNewCategory.value
-  console.log(newCategory)
-  categories.push(newCategory)
-  includeCategoriestoSelect()
-  inputTextNewCategory.value = ""
-  const categoriesToJSON = JSON.stringify(categories)
-  localStorage.setItem("categories", categoriesToJSON)
-
-}
 
 const getCategories =()=> {
   const addCategoriesLS = localStorage.getItem("categories")
@@ -273,6 +263,40 @@ const includeCategoriestoSelect = () => {
  includeCategoriestoSelect()
 
 
+
  const addCategoriesToHTML = () => {
-   
+
+  const categories = getCategories()
+  const containerForCategories = document.getElementById("contenedor-de-categorias")
+  const categoriesToString = categories.reduce((acc, element)=> {
+    return acc + `<div class="columns is-multiline is-mobile is-vcentered">
+    <div class="column is-3-tablet is-6-mobile has-text-right-mobile">
+      <span class="tag is-primary is-light" id="category">${element}</span>
+    </div>
+
+    <div class="column is-2-tablet is-6-mobile has-text-right">
+      <p class="is-fullwidth">
+        <a href="#" class="mr-3 is-size-7 edit-link" id="edit-category">Editar</a>
+        <a href="#" class="is-size-7 delete-link">Eliminar</a>
+      </p>
+    </div>
+  
+  </div>`, "")
+containerForCategories.innerHTML = categoriesToString
+
  }
+
+ addCategoriesToHTML ()
+
+ buttonAddNewCategory.onclick = () => {
+  const newCategory= inputTextNewCategory.value
+  const categories = getCategories()
+  categories.push(newCategory)
+  inputTextNewCategory.value = ""
+  const categoriesToJSON = JSON.stringify(categories)
+  localStorage.setItem("categories", categoriesToJSON)
+
+  addCategoriesToHTML()
+  includeCategoriestoSelect()
+
+}
