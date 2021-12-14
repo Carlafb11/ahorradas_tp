@@ -53,11 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const sectionNewOperation = document.getElementById("seccion-nueva-operacion")
 const openNewOperationButton = document.getElementById("button-new-operation")
+
 const buttonCancelNewOperation = document.getElementById("cancel-new-operation")
+const buttonCancelEditOperation = document.getElementById("edit-cancel-new-operation")
 const cardsSection = document.getElementById("cards-section")
 const buttonAddNewOperation= document.getElementById("add-new-operation")
 const openCategoriesWindow = document.getElementById("categories-window")
-console.log(openCategoriesWindow)
 const categoriesSection = document.querySelector("#box-categories")
 const contenedor = document.getElementById('contenedor-de-lista')
 
@@ -80,6 +81,9 @@ const inputOrderSelect = document.querySelector("#order-select")
 // Selectores para sección operaciones
 const reportsSection =  document.getElementById("seccion-reportes")
 const operationsImgContainer = document.getElementById("operations-img-container")
+const tableTitles = document.getElementById("tabla-operaciones")
+const selectExpense = document.getElementById("select-expense")
+const selectGain = document.getElementById("select-gain")
 
 // Selectores de seccion Categorias
 
@@ -119,7 +123,6 @@ const removeImg = () => {
     operationsImgContainer.classList.add("is-hidden")
   } 
 }
-
 removeImg()
 
 // FUNCIONALIDAD PARA AGREGAR UNA NUEVA OPERACION.
@@ -137,23 +140,74 @@ formNewOperation.onsubmit = (e) => {
 
   arrayClonado.push(addOperation)
 
-  localStorage.setItem("operaciones", JSON.stringify(arrayClonado));
+  localStorage.setItem("operaciones", JSON.stringify(arrayClonado))
   window.location.reload()
 }
 
 // Eliminar operaciones del LS
 const removeOperationLS = (posicion) => {
-  const newArray = [...dataJS];
-  newArray.splice(posicion, 1);
-  localStorage.setItem("operaciones", JSON.stringify(newArray));
-  window.location.reload();
+  const newArrayOperations = [...dataJS]
+  newArrayOperations.splice(posicion, 1)
+  localStorage.setItem("operaciones", JSON.stringify(newArrayOperations))
+  localStorage.setItem("operacionesConFiltro", JSON.stringify(newArrayOperations))
+  window.location.reload()
+}
+
+// Selectores operaciones
+const sectionEditOperation = document.getElementById("section-editar-operacion")
+const sectionEditOperationButton = document.getElementById("edit-operation-button")
+const saveInputName = document.getElementById("save-input-description-name")
+const saveAmountName = document.getElementById("save-input-amount-name")
+const saveTypeName = document.getElementById("save-input-for-type")
+const saveCategoryName = document.getElementById("save-select-for-category")
+const saveDateName = document.getElementById("save-input-for-date")
+const confirmEditButton = document.getElementById("save-form-button-edit-operation")
+let objetoParaEditar = {};
+let posicionDeObjeto = 0;
+
+// Editar operaciones del LS
+const editOperationsLS = (posicion) => {
+  const newArrayOperations = [...dataJS]
+  objetoParaEditar = newArrayOperations[posicion];
+  posicionDeObjeto = posicion;
+
+  //populando campos del form
+  saveInputName.value = objetoParaEditar.descripcion;
+  saveAmountName.value = objetoParaEditar.monto;
+  saveTypeName.value = objetoParaEditar.tipo;
+  saveCategoryName.value = objetoParaEditar.categoria;
+  saveDateName.value = objetoParaEditar.fecha;
+
+
+  sectionEditOperation.classList.remove("is-hidden")
+  categoriesSection.classList.add("is-hidden")
+  cardsSection.classList.add("is-hidden")
+  reportsSection.classList.add("is-hidden")
+  
+}
+
+confirmEditButton.onclick = (e) => {
+  const newArrayOperations = [...dataJS]
+  e.preventDefault();
+  objetoParaEditar.descripcion = saveInputName.value;
+  objetoParaEditar.monto = saveAmountName.value;
+  objetoParaEditar.tipo = saveTypeName.value;
+  objetoParaEditar.categoria =saveCategoryName.value;
+  objetoParaEditar.fecha = saveDateName.value;
+  newArrayOperations[posicionDeObjeto] = objetoParaEditar;
+
+  localStorage.setItem("operaciones", JSON.stringify(newArrayOperations))
+  localStorage.setItem("operacionesConFiltro", JSON.stringify(newArrayOperations))
+  window.location.reload()
 }
 
 
 // FUNCIONALIDAD PARA AGREGAR CREAR LA TABLA
 const llenarTabla = (array) => {
-  
-  let htmlHolder = ""
+  let htmlHolder = "";
+  //Obtener operaciones filtradas desde LS
+  // const dataFiltrada = JSON.parse(localStorage.getItem("operacionesConFiltro"))
+  // const arrayCorrecto = dataFiltrada || dataJS
 
   array.map((item, index) => {
     htmlHolder += 
@@ -167,22 +221,35 @@ const llenarTabla = (array) => {
     <div class="column is-2-tablet has-text-grey is-hidden-mobile has-text-right-tablet" id="date">
       ${item.fecha}
     </div>
-    <div class="column is-2-tablet is-6-mobile has-text-weight-bold has-text-right-tablet is-size-4-mobile has-text-success" id="amount">
-      ${item.monto}
+    <div
+      class="column is-2-tablet is-6-mobile has-text-weight-bold has-text-right-tablet is-size-4-mobile ${item.tipo === "expense" ? "has-text-danger" : "has-text-success"}"
+      id="amount"
+    >
+      $${item.monto}
     </div>
     <div class="column is-2-tablet is-6-mobile has-text-right">
       <p class="is-fullwidth">
-        <a href="#" class="mr-3 is-size-7 edit-link" id="edit-operation">Editar</a>
+        <a href="#" class="mr-3 is-size-7 edit-link" id="edit-operation-button" onclick={editOperationsLS(${index})}>Editar</a>
         <a href="#" class="is-size-7 delete-link" onclick={removeOperationLS(${index})}>Eliminar</a>
       </p>
     </div>
   </div>`
   })
-contenedor.innerHTML=htmlHolder
+  contenedor.innerHTML=htmlHolder
+
+  if (dataJS.length >= 1) {
+    tableTitles.classList.remove("is-hidden")
+  }
+
 }
 
 llenarTabla(dataJS)
- 
+
+buttonCancelEditOperation.onclick = () => {
+  sectionEditOperation.classList.add("is-hidden")
+  cardsSection.classList.remove("is-hidden")
+}
+
 
 // FUNCIONALIDAD PARA APLICAR FILTROS 
 const applyFilters = () => {
@@ -215,7 +282,7 @@ const applyFilters = () => {
     
   return finalArray
 }
- 
+
 
 inputTypeSelect.onchange = () => {
 const filteredArray = applyFilters()

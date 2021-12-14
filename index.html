@@ -258,12 +258,11 @@
   <!-- Final de Seccion de Categorías -->
 
   <!-- Seccion Nueva Operacion -->
-
   <section class="is-hidden section columns" id="seccion-nueva-operacion">
     <div class="column is-10 is-offset-1-widescreen">
       <article class="box">
         <div class="column">
-          <h2 class="title is-2 has-text-weight-bold">Nueva Operacion</h2>
+          <h2 class="title is-2 has-text-weight-bold">Nueva operación</h2>
 
           <form id="form-new-operation">
 
@@ -282,8 +281,8 @@
             <div class="control">
               <div class="select is-fullwidth">
                 <select id="input-for-type">
-                  <option value="expense">Gasto</option>
-                  <option value="gain">Ganancia</option>
+                  <option id="select-expense" value="expense">Gasto</option>
+                  <option id="select-gain" value="gain">Ganancia</option>
                 </select>
               </div>
             </div>
@@ -319,10 +318,77 @@
           
       </article>
     </div>
-    <!--  Final de Seccion Nueva Operacion -->
-
   </section>
+  <!--  Final de Seccion Nueva Operacion -->
 
+  <!-- Inicio de sección editar operación -->
+  <section class="is-hidden section columns" id="section-editar-operacion">
+    <div class="column is-10 is-offset-1-widescreen">
+      <article class="box">
+        <div class="column">
+          <h2 class="title is-2 has-text-weight-bold">Editar operación</h2>
+
+          <form>
+            <label class="label">Descripción</label>
+          <div>
+            <input class="input is-small" type="text" id="save-input-description-name">
+          </div>
+
+          <label for="monto" class="label">Monto</label>
+          <div class="control">
+            <input id="save-input-amount-name" class="input is-small" type="number" value="0">
+          </div>
+
+          <div class="field">
+            <label for="tipo" class="label">Tipo</label>
+            <div class="control">
+              <div class="select is-fullwidth">
+                <select id="save-input-for-type">
+                  <option value="expense">Gasto</option>
+                  <option value="gain">Ganancia</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <label class="label">Categoría</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select id="save-select-for-category">
+                <option value="todos">Todas</option>
+                <option value="comida">Comidas</option>
+                <option value="servicios">Servicios</option>
+                <option value="salidas">Salidas</option>
+                <option value="educacion">Educacion</option>
+                <option value="transporte">Transporte</option>
+                <option value="trabajo">Trabajo</option>
+              </select>
+            </div>
+
+            <label class="label">Fecha</label>
+            <div class="control">
+              <input id="save-input-for-date" class="input is-small" type="date">
+            </div>
+
+            <div class="column">
+              <div class="column has-text-right-tablet">
+
+                <button class="button is-light" id="edit-cancel-new-operation">
+                  Cancelar
+                </button>
+                <button class="button is-success" id="save-form-button-edit-operation">
+                  Editar
+                </button>
+              </div>
+            </div>
+
+          </form>
+
+          
+      </article>
+    </div>
+  </section>
+<!-- Inicio de sección editar operación -->
   
   <!-- Reportes -->
   <section class="is-hidden section columns" id="seccion-reportes">
