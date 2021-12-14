@@ -282,6 +282,7 @@ const includeCategoriestoSelect = () => {
     </div>
   
   </div>`, "")
+  
 containerForCategories.innerHTML = categoriesToString
 
  }
