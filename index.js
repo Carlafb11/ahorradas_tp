@@ -55,6 +55,7 @@ const sectionNewOperation = document.getElementById("seccion-nueva-operacion")
 const openNewOperationButton = document.getElementById("button-new-operation")
 
 const buttonCancelNewOperation = document.getElementById("cancel-new-operation")
+const buttonCancelEditOperation = document.getElementById("edit-cancel-new-operation")
 const cardsSection = document.getElementById("cards-section")
 const buttonAddNewOperation= document.getElementById("add-new-operation")
 const openCategoriesWindow = document.getElementById("categories-window")
@@ -81,6 +82,8 @@ const inputOrderSelect = document.querySelector("#order-select")
 const reportsSection =  document.getElementById("seccion-reportes")
 const operationsImgContainer = document.getElementById("operations-img-container")
 const tableTitles = document.getElementById("tabla-operaciones")
+const selectExpense = document.getElementById("select-expense")
+const selectGain = document.getElementById("select-gain")
 
 
 openNewOperationButton.onclick = () => {
@@ -145,9 +148,48 @@ const removeOperationLS = (posicion) => {
   window.location.reload()
 }
 
+// Selectores operaciones
+const sectionEditOperation = document.getElementById("section-editar-operacion")
+const sectionEditOperationButton = document.getElementById("edit-operation-button")
+const saveInputName = document.getElementById("save-input-description-name")
+const saveAmountName = document.getElementById("save-input-amount-name")
+const saveTypeName = document.getElementById("save-input-for-type")
+const saveCategoryName = document.getElementById("save-select-for-category")
+const saveDateName = document.getElementById("save-input-for-date")
+const confirmEditButton = document.getElementById("save-form-button-edit-operation")
+let objetoParaEditar = {};
+let posicionDeObjeto = 0;
+
 // Editar operaciones del LS
 const editOperationsLS = (posicion) => {
   const newArrayOperations = [...dataJS]
+  objetoParaEditar = newArrayOperations[posicion];
+  posicionDeObjeto = posicion;
+
+  //populando campos del form
+  saveInputName.value = objetoParaEditar.descripcion;
+  saveAmountName.value = objetoParaEditar.monto;
+  saveTypeName.value = objetoParaEditar.tipo;
+  saveCategoryName.value = objetoParaEditar.categoria;
+  saveDateName.value = objetoParaEditar.fecha;
+
+
+  sectionEditOperation.classList.remove("is-hidden")
+  categoriesSection.classList.add("is-hidden")
+  cardsSection.classList.add("is-hidden")
+  reportsSection.classList.add("is-hidden")
+  
+}
+
+confirmEditButton.onclick = (e) => {
+  const newArrayOperations = [...dataJS]
+  e.preventDefault();
+  objetoParaEditar.descripcion = saveInputName.value;
+  objetoParaEditar.monto = saveAmountName.value;
+  objetoParaEditar.tipo = saveTypeName.value;
+  objetoParaEditar.categoria =saveCategoryName.value;
+  objetoParaEditar.fecha = saveDateName.value;
+  newArrayOperations[posicionDeObjeto] = objetoParaEditar;
 
   localStorage.setItem("operaciones", JSON.stringify(newArrayOperations))
   localStorage.setItem("operacionesConFiltro", JSON.stringify(newArrayOperations))
@@ -174,8 +216,11 @@ const llenarTabla = (array) => {
     <div class="column is-2-tablet has-text-grey is-hidden-mobile has-text-right-tablet" id="date">
       ${item.fecha}
     </div>
-    <div class="column is-2-tablet is-6-mobile has-text-weight-bold has-text-right-tablet is-size-4-mobile has-text-success" id="amount">
-      ${item.monto}
+    <div
+      class="column is-2-tablet is-6-mobile has-text-weight-bold has-text-right-tablet is-size-4-mobile ${item.tipo === "expense" ? "has-text-danger" : "has-text-success"}"
+      id="amount"
+    >
+      $${item.monto}
     </div>
     <div class="column is-2-tablet is-6-mobile has-text-right">
       <p class="is-fullwidth">
@@ -186,11 +231,20 @@ const llenarTabla = (array) => {
   </div>`
   })
   contenedor.innerHTML=htmlHolder
-  tableTitles.classList.remove("is-hidden")
+
+  if (dataJS.length >= 1) {
+    tableTitles.classList.remove("is-hidden")
+  }
+
 }
 
 llenarTabla(dataJS)
- 
+
+buttonCancelEditOperation.onclick = () => {
+  sectionEditOperation.classList.add("is-hidden")
+  cardsSection.classList.remove("is-hidden")
+}
+
 
 // FUNCIONALIDAD PARA APLICAR FILTROS 
 const applyFilters = () => {
