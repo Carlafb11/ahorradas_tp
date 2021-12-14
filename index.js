@@ -55,6 +55,7 @@ const sectionNewOperation = document.getElementById("seccion-nueva-operacion")
 const openNewOperationButton = document.getElementById("button-new-operation")
 
 const buttonCancelNewOperation = document.getElementById("cancel-new-operation")
+const buttonCancelEditOperation = document.getElementById("edit-cancel-new-operation")
 const cardsSection = document.getElementById("cards-section")
 const buttonAddNewOperation= document.getElementById("add-new-operation")
 const openCategoriesWindow = document.getElementById("categories-window")
@@ -147,15 +148,35 @@ const removeOperationLS = (posicion) => {
   window.location.reload()
 }
 
+// Selectores operaciones
+const sectionEditOperation = document.getElementById("section-editar-operacion")
+const sectionEditOperationButton = document.getElementById("edit-operation-button")
+const saveInputName = document.getElementById("save-input-description-name")
+
 // Editar operaciones del LS
 const editOperationsLS = (posicion) => {
   const newArrayOperations = [...dataJS]
+  newArrayOperations[posicion].description = saveInputName.value
 
-  localStorage.setItem("operaciones", JSON.stringify(newArrayOperations))
-  localStorage.setItem("operacionesConFiltro", JSON.stringify(newArrayOperations))
-  window.location.reload()
+  console.log(newArrayOperations)
+
+  // localStorage.setItem("operaciones", JSON.stringify(newArrayOperations))
+  // localStorage.setItem("operacionesConFiltro", JSON.stringify(newArrayOperations))
+  // window.location.reload()
+  
 }
 
+sectionEditOperationButton.onclick = () => {
+  sectionEditOperation.classList.remove("is-hidden")
+  categoriesSection.classList.add("is-hidden")
+  cardsSection.classList.add("is-hidden")
+  reportsSection.classList.add("is-hidden")
+}
+
+buttonCancelEditOperation.onclick = () => {
+  sectionEditOperation.classList.add("is-hidden")
+  cardsSection.classList.remove("is-hidden")
+}
 
 // FUNCIONALIDAD PARA AGREGAR CREAR LA TABLA
 const llenarTabla = (array) => {
@@ -197,7 +218,6 @@ const llenarTabla = (array) => {
 
 llenarTabla(dataJS)
  
-
 // FUNCIONALIDAD PARA APLICAR FILTROS 
 const applyFilters = () => {
     const type = inputTypeSelect.value
