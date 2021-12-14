@@ -184,6 +184,7 @@ const sectionEditOperationButton = document.getElementById("edit-operation-butto
 const saveInputName = document.getElementById("save-input-description-name")
 const saveAmountName = document.getElementById("save-input-amount-name")
 const saveTypeName = document.getElementById("save-input-for-type")
+// const saveCategoryName = document.getElementById("save-select-for-category")
 const saveDateName = document.getElementById("save-input-for-date")
 const confirmEditButton = document.getElementById("save-form-button-edit-operation")
 let objetoParaEditar = {};
