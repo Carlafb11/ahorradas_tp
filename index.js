@@ -1,54 +1,4 @@
-// BULMA JS
-document.addEventListener('DOMContentLoaded', () => {
-
-  // Get all "navbar-burger" elements
-  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-  // Check if there are any navbar burgers
-  if ($navbarBurgers.length > 0) {
-
-    // Add a click event on each of them
-    $navbarBurgers.forEach( el => {
-      el.addEventListener('click', () => {
-
-        // Get the target from the "data-target" attribute
-        const target = el.dataset.target;
-        const $target = document.getElementById(target);
-
-        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-        el.classList.toggle('is-active');
-        $target.classList.toggle('is-active');
-
-      });
-    });
-  }
-
-});
-
-
-  // Get all "navbar-burger" elements
-  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-  // Check if there are any navbar burgers
-  if ($navbarBurgers.length > 0) {
-
-    // Add a click event on each of them
-    $navbarBurgers.forEach( el => {
-      el.addEventListener('click', () => {
-
-        // Get the target from the "data-target" attribute
-        const target = el.dataset.target;
-        const $target = document.getElementById(target);
-
-        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-        el.classList.toggle('is-active');
-        $target.classList.toggle('is-active');
-
-      });
-    });
-  }
-
-  
+ 
 ///////////////// SELECTORES ✨ /////////////
 
 const sectionNewOperation = document.getElementById("seccion-nueva-operacion")
@@ -91,6 +41,11 @@ const buttonAddNewCategory = document.getElementById("form-button-add-new-catego
 const inputTextNewCategory = document.getElementById("input-text-add-new-category")
 const saveCategoryName = document.getElementById("save-select-for-category")
 
+
+
+
+// FUNCIONALIDAD AGREGAR CATEGORIES
+
 const existingCategories = JSON.parse(localStorage.getItem("categories"));
 
 if (!existingCategories) {
@@ -114,6 +69,57 @@ newCategories.map((item) => {
   saveCategoryName.appendChild(newOption);
 })
 
+const includeCategoriestoSelect = () => {
+  const categories = getCategories()
+  const categoriesToString = categories.reduce ((acc, element)=> {
+    return acc + `<option value ="${element}">${element}</option>`
+  }, "")
+  selectForCategory.innerHTML = categoriesToString
+}
+ includeCategoriestoSelect()
+
+
+
+ const addCategoriesToHTML = () => {
+
+  const categories = getCategories()
+  const containerForCategories = document.getElementById("contenedor-de-categorias")
+  const categoriesToString = categories.reduce((acc, element)=> acc + `<div class="columns is-multiline is-mobile is-vcentered">
+    <div class="column is-3-tablet is-6-mobile has-text-right-mobile">
+      <span class="tag is-primary is-light" id="category">${element}</span>
+    </div>
+
+    <div class="column is-2-tablet is-6-mobile has-text-right">
+      <p class="is-fullwidth">
+        <a href="#" class="mr-3 is-size-7 edit-link" id="edit-category">Editar</a>
+        <a href="#" class="is-size-7 delete-link">Eliminar</a>
+      </p>
+    </div>
+  
+  </div>`, "")
+  
+containerForCategories.innerHTML = categoriesToString
+
+ }
+
+ addCategoriesToHTML ()
+
+ buttonAddNewCategory.onclick = () => {
+  const newCategory= inputTextNewCategory.value
+  const categories = getCategories()
+  categories.push(newCategory)
+  inputTextNewCategory.value = ""
+  const categoriesToJSON = JSON.stringify(categories)
+  localStorage.setItem("categories", categoriesToJSON)
+
+  addCategoriesToHTML()
+  includeCategoriestoSelect()
+
+}
+
+
+// FUNCIONALIDAD ABRIR/CERRAR MODALES 
+
 openNewOperationButton.onclick = () => {
     sectionNewOperation.classList.remove("is-hidden")
     categoriesSection.classList.add("is-hidden")
@@ -127,7 +133,6 @@ buttonCancelNewOperation.onclick = () => {
 }
 
 openCategoriesWindow.onclick =()=> {
-  console.log("fdjnkd")
   categoriesSection.classList.toggle("is-hidden")
   cardsSection.classList.toggle("is-hidden")
 }
@@ -225,9 +230,6 @@ confirmEditButton.onclick = (e) => {
 // FUNCIONALIDAD PARA AGREGAR CREAR LA TABLA
 const llenarTabla = (array) => {
   let htmlHolder = "";
-  //Obtener operaciones filtradas desde LS
-  // const dataFiltrada = JSON.parse(localStorage.getItem("operacionesConFiltro"))
-  // const arrayCorrecto = dataFiltrada || dataJS
 
   array.map((item, index) => {
     htmlHolder += 
@@ -320,50 +322,4 @@ inputDateSelect.onchange = () => {
   llenarTabla(filteredArray)
 }
 
-const includeCategoriestoSelect = () => {
-  const categories = getCategories()
-  const categoriesToString = categories.reduce ((acc, element)=> {
-    return acc + `<option value ="${element}">${element}</option>`
-  }, "")
-  selectForCategory.innerHTML = categoriesToString
-}
- includeCategoriestoSelect()
 
-
-
- const addCategoriesToHTML = () => {
-
-  const categories = getCategories()
-  const containerForCategories = document.getElementById("contenedor-de-categorias")
-  const categoriesToString = categories.reduce((acc, element)=> acc + `<div class="columns is-multiline is-mobile is-vcentered">
-    <div class="column is-3-tablet is-6-mobile has-text-right-mobile">
-      <span class="tag is-primary is-light" id="category">${element}</span>
-    </div>
-
-    <div class="column is-2-tablet is-6-mobile has-text-right">
-      <p class="is-fullwidth">
-        <a href="#" class="mr-3 is-size-7 edit-link" id="edit-category">Editar</a>
-        <a href="#" class="is-size-7 delete-link">Eliminar</a>
-      </p>
-    </div>
-  
-  </div>`, "")
-  
-containerForCategories.innerHTML = categoriesToString
-
- }
-
- addCategoriesToHTML ()
-
- buttonAddNewCategory.onclick = () => {
-  const newCategory= inputTextNewCategory.value
-  const categories = getCategories()
-  categories.push(newCategory)
-  inputTextNewCategory.value = ""
-  const categoriesToJSON = JSON.stringify(categories)
-  localStorage.setItem("categories", categoriesToJSON)
-
-  addCategoriesToHTML()
-  includeCategoriestoSelect()
-
-}
