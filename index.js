@@ -89,14 +89,35 @@ const selectGain = document.getElementById("select-gain")
 
 const buttonAddNewCategory = document.getElementById("form-button-add-new-category")
 const inputTextNewCategory = document.getElementById("input-text-add-new-category")
+const saveCategoryName = document.getElementById("save-select-for-category")
 
+const existingCategories = JSON.parse(localStorage.getItem("categories"));
+
+if (!existingCategories) {
+  localStorage.setItem("categories", JSON.stringify(["comida","servicios","salidas","educacion","transporte","trabajo" ]));
+}
+
+const getCategories = () => JSON.parse(localStorage.getItem("categories")) || []
+
+const newCategories = getCategories()
+newCategories.map((item) => {
+  const newOption = document.createElement('option');
+  newOption.value = item;
+  newOption.innerHTML = item;
+  inputCategorySelect.appendChild(newOption);
+})
+
+newCategories.map((item) => {
+  const newOption = document.createElement('option');
+  newOption.value = item;
+  newOption.innerHTML = item;
+  saveCategoryName.appendChild(newOption);
+})
 
 openNewOperationButton.onclick = () => {
     sectionNewOperation.classList.remove("is-hidden")
     categoriesSection.classList.add("is-hidden")
     cardsSection.classList.add("is-hidden")
-
-    
 }
 
 buttonCancelNewOperation.onclick = () => {
@@ -159,7 +180,6 @@ const sectionEditOperationButton = document.getElementById("edit-operation-butto
 const saveInputName = document.getElementById("save-input-description-name")
 const saveAmountName = document.getElementById("save-input-amount-name")
 const saveTypeName = document.getElementById("save-input-for-type")
-const saveCategoryName = document.getElementById("save-select-for-category")
 const saveDateName = document.getElementById("save-input-for-date")
 const confirmEditButton = document.getElementById("save-form-button-edit-operation")
 let objetoParaEditar = {};
@@ -300,26 +320,6 @@ inputDateSelect.onchange = () => {
   llenarTabla(filteredArray)
 }
 
-
-// FUNCIONALIDAD PARA CATEGORIAS 
-
-const categories = ["comida","servicios","salidas","educacion","transporte","trabajo" ]
-
-// const buttonAddNewCategory = document.getElementById("form-button-add-new-category")
-// const inputTextNewCategory = document.getElementById("input-text-add-new-category")
-
-
-
-const getCategories =()=> {
-  const addCategoriesLS = localStorage.getItem("categories")
-  if (addCategoriesLS === null) {
-    return categories
-  }
-  else {
-    return JSON.parse(addCategoriesLS)
-  }
-}
-
 const includeCategoriestoSelect = () => {
   const categories = getCategories()
   const categoriesToString = categories.reduce ((acc, element)=> {
@@ -335,8 +335,7 @@ const includeCategoriestoSelect = () => {
 
   const categories = getCategories()
   const containerForCategories = document.getElementById("contenedor-de-categorias")
-  const categoriesToString = categories.reduce((acc, element)=> {
-    return acc + `<div class="columns is-multiline is-mobile is-vcentered">
+  const categoriesToString = categories.reduce((acc, element)=> acc + `<div class="columns is-multiline is-mobile is-vcentered">
     <div class="column is-3-tablet is-6-mobile has-text-right-mobile">
       <span class="tag is-primary is-light" id="category">${element}</span>
     </div>
